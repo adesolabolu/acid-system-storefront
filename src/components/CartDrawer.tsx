@@ -203,7 +203,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               >
                 {/* Visual thumbnail */}
                 <div className="w-20 h-20 border-2 border-[#09090B] rounded-[8px] overflow-hidden bg-[#18181B] shrink-0">
-                  <ProductVisual type={item.product.visualType} telemetrySpec={item.product.telemetrySpec} className="w-full h-full" />
+                  <ProductVisual type={item.product.visualType} identifier={item.product.slug || item.product.sku_code || item.product.id} telemetrySpec={item.product.telemetrySpec} className="w-full h-full" />
                 </div>
 
                 {/* Info & Stepper */}

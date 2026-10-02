@@ -65,6 +65,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
             <div className="relative w-full aspect-square border-2 border-[#09090B] rounded-[16px] overflow-hidden bg-[#18181B] shadow-hard">
               <ProductVisual
                 type={product.visualType}
+                identifier={product.slug || product.sku_code || product.id}
                 isSoldOut={product.isSoldOut}
                 telemetrySpec={product.telemetrySpec}
                 className="w-full h-full"

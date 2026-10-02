@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { useCart } from './CartContext';
 import { Product } from '@/types';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
@@ -18,7 +19,7 @@ export default function ShopClient({ products }: ShopClientProps) {
   const searchParams = useSearchParams();
   const initialCategory = searchParams.get('category') || 'ALL';
 
-  const [cartItems, setCartItems] = useState<any[]>([]);
+  const { cart, addToCart, updateQuantity, removeItem, clearCart, totalItems } = useCart();
   const [isCartOpen, setIsCartOpen] = useState(false);
   
   const [searchQuery, setSearchQuery] = useState('');
@@ -29,57 +30,12 @@ export default function ShopClient({ products }: ShopClientProps) {
   const [addedProductId, setAddedProductId] = useState<string | number | null>(null);
   const [selectedSizes, setSelectedSizes] = useState<Record<string, string>>({});
 
-  // Initialize cart from local storage
-  useEffect(() => {
-    const saved = localStorage.getItem('acid_cart');
-    if (saved) {
-      try {
-        setCartItems(JSON.parse(saved));
-      } catch (e) {
-        console.error('Failed to parse cart');
-      }
-    }
-  }, []);
-
-  const saveCart = (items: any[]) => {
-    setCartItems(items);
-    localStorage.setItem('acid_cart', JSON.stringify(items));
-  };
-
   const handleAddToCart = (product: Product, size: string) => {
-    const existing = cartItems.find((i) => i.product.id === product.id && i.size === size);
-    if (existing) {
-      saveCart(cartItems.map((i) =>
-        i.product.id === product.id && i.size === size
-          ? { ...i, quantity: i.quantity + 1 }
-          : i
-      ));
-    } else {
-      saveCart([...cartItems, { product, size, quantity: 1 }]);
-    }
-    
+    addToCart(product, size);
     setAddedProductId(product.id);
     setTimeout(() => setAddedProductId(null), 1200);
     setIsCartOpen(true);
   };
-
-  const handleUpdateQuantity = (productId: string | number, size: string, delta: number) => {
-    saveCart(
-      cartItems.map((item) => {
-        if (item.product.id === productId && item.size === size) {
-          const newQ = Math.max(0, item.quantity + delta);
-          return { ...item, quantity: newQ };
-        }
-        return item;
-      }).filter((item) => item.quantity > 0)
-    );
-  };
-
-  const handleRemoveItem = (productId: string | number, size: string) => {
-    saveCart(cartItems.filter((item) => !(item.product.id === productId && item.size === size)));
-  };
-
-  const handleClearCart = () => saveCart([]);
 
   const categories = ['ALL', 'TAILORING', 'SHIRTING', 'TOPS', 'BOTTOMS', 'FOOTWEAR & CARRY'];
   const sizes = ['ALL', 'S', 'M', 'L', 'XL', '30', '32', '34', '36', 'EU 41-44', 'ONE SIZE'];
@@ -129,7 +85,7 @@ export default function ShopClient({ products }: ShopClientProps) {
 
   return (
     <div className="min-h-screen bg-[#F8F4E8] text-[#09090B] font-sans selection:bg-[#D2E823] selection:text-[#09090B]">
-      <Navbar cartCount={cartItems.reduce((acc, i) => acc + i.quantity, 0)} onOpenCart={() => setIsCartOpen(true)} />
+      <Navbar cartCount={totalItems} onOpenCart={() => setIsCartOpen(true)} />
 
       <main className="max-w-7xl mx-auto px-4 md:px-8 py-8">
         <header className="mb-8">
@@ -217,6 +173,7 @@ export default function ShopClient({ products }: ShopClientProps) {
               <div className="relative w-full aspect-square border-b-2 border-[#09090B] bg-[#18181B] overflow-hidden group">
                 <ProductVisual
                   type={product.visualType}
+                  identifier={product.slug || product.sku_code || product.id}
                   isSoldOut={product.isSoldOut}
                   telemetrySpec={product.telemetrySpec}
                   className="w-full h-full p-4 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
@@ -322,10 +279,10 @@ export default function ShopClient({ products }: ShopClientProps) {
       <CartDrawer
         isOpen={isCartOpen}
         onClose={() => setIsCartOpen(false)}
-        items={cartItems}
-        onUpdateQuantity={handleUpdateQuantity}
-        onRemoveItem={handleRemoveItem}
-        onClearCart={handleClearCart}
+        items={cart}
+        onUpdateQuantity={updateQuantity}
+        onRemoveItem={removeItem}
+        onClearCart={clearCart}
       />
     </div>
   );

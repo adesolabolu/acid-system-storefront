@@ -1,7 +1,7 @@
 "use client";
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { ShoppingBag, Sliders, Zap } from 'lucide-react';
+import { ShoppingBag, Sliders, Zap, Loader2, User, Menu } from 'lucide-react';
 import { GlitchText } from './GlitchText';
 import { useSession, signIn, signOut } from "next-auth/react";
 
@@ -16,7 +16,21 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenCart,
 }) => {
   const { data: session, status } = useSession();
+  const [showWelcomeToast, setShowWelcomeToast] = useState(false);
+
+  useEffect(() => {
+    if (status === 'authenticated') {
+      const hasWelcomed = sessionStorage.getItem('acidsys_welcomed');
+      if (!hasWelcomed) {
+        setShowWelcomeToast(true);
+        sessionStorage.setItem('acidsys_welcomed', 'true');
+        setTimeout(() => setShowWelcomeToast(false), 4000);
+      }
+    }
+  }, [status]);
+
   return (
+    <>
     <header className="sticky top-4 z-40 mx-4 md:mx-8 mb-6">
       <div className="flex items-center justify-between px-5 md:px-7 py-3.5 bg-[#F8F4E8]/90 backdrop-blur-[24px] border-2 border-[#09090B] rounded-[12px] shadow-hard">
         {/* Zone 1: Brand Wordmark in Dela Gothic One */}
@@ -56,40 +70,79 @@ export const Navbar: React.FC<NavbarProps> = ({
         </nav>
 
         {/* Zone 3: Action Buttons */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 md:gap-3">
           {/* Authentic Fashion Label Location & Currency Status Pill */}
           <div
-            className="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 text-xs font-mono-code font-bold uppercase tracking-wider bg-[#D2E823] text-[#09090B] border-2 border-[#09090B] rounded-[8px] shadow-hard-sm"
+            className="hidden lg:inline-flex items-center gap-2 px-3 py-1.5 text-xs font-mono-code font-bold uppercase tracking-wider bg-[#D2E823] text-[#09090B] border-2 border-[#09090B] rounded-[8px] shadow-hard-sm"
             title="Atelier Region & Currency"
           >
             <span className="w-2 h-2 rounded-full bg-[#09090B] inline-block animate-ping" />
             <span className="whitespace-nowrap">LAGOS // ₦ NGN</span>
           </div>
 
-          {status === "unauthenticated" ? (
+          {/* Desktop Auth */}
+          {status === "loading" ? (
+            <div className="hidden md:flex items-center justify-center border-2 border-[#09090b] bg-[#D2E823] text-[#09090b] px-3 py-2 shadow-hard-sm">
+              <Loader2 className="w-4 h-4 animate-spin" />
+            </div>
+          ) : status === "unauthenticated" ? (
             <button onClick={() => signIn("google")} className="hidden md:inline-block border-2 border-[#09090b] bg-[#D2E823] text-[#09090b] font-mono-code text-[11px] uppercase px-3 py-2 font-bold shadow-[2px_2px_0px_#09090b] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">SIGN IN WITH GOOGLE</button>
           ) : status === "authenticated" ? (
             <div className="hidden md:flex items-center gap-2 border-2 border-[#09090b] bg-[#F8F4E8] px-2.5 py-1.5 shadow-hard-sm text-xs font-mono-code">
               <span className="text-[#09090b] font-bold">OP // {session.user?.name?.split(" ")[0] || "AUTH"}</span>
-              <button onClick={() => signOut()} className="text-[10px] text-red-600 hover:underline uppercase font-bold">[EXIT]</button>
+              <Link href="/dashboard" className="text-[10px] text-[#09090b] hover:underline uppercase font-bold px-1">[DASHBOARD]</Link>
+              <button onClick={() => { localStorage.removeItem('acidsys_cart'); signOut(); }} className="text-[10px] text-red-600 hover:underline uppercase font-bold px-1">[EXIT]</button>
             </div>
           ) : null}
 
+          {/* Mobile Auth Icon */}
+          <div className="md:hidden">
+            {status === "loading" ? (
+              <div className="p-2 border-2 border-[#09090b] bg-[#D2E823] text-[#09090b] rounded-[8px] shadow-hard-sm flex items-center justify-center">
+                <Loader2 className="w-4 h-4 animate-spin" />
+              </div>
+            ) : status === "unauthenticated" ? (
+              <button onClick={() => signIn("google")} className="p-2 border-2 border-[#09090b] bg-white text-[#09090b] rounded-[8px] shadow-hard-sm hover:translate-y-[2px] hover:shadow-none transition-all flex items-center justify-center" aria-label="Sign In">
+                <User className="w-4 h-4" />
+              </button>
+            ) : status === "authenticated" ? (
+              <Link href="/dashboard" className="p-2 border-2 border-[#09090b] bg-[#D2E823] text-[#09090b] rounded-[8px] shadow-hard-sm hover:translate-y-[2px] hover:shadow-none transition-all flex items-center justify-center" aria-label="Dashboard">
+                <User className="w-4 h-4" />
+              </Link>
+            ) : null}
+          </div>
+
           <button
             onClick={onOpenCart}
-            className="relative inline-flex items-center gap-2.5 px-4 py-2 text-xs font-bold uppercase tracking-wider bg-[#09090B] text-[#D2E823] border-2 border-[#09090B] rounded-[8px] shadow-hard-sm hover:bg-[#D2E823] hover:text-[#09090B] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all active:translate-y-[3px]"
+            className="relative flex items-center justify-center p-2 md:px-4 md:py-2 md:gap-2.5 bg-[#09090B] text-[#D2E823] border-2 border-[#09090B] rounded-[8px] shadow-hard-sm hover:bg-[#D2E823] hover:text-[#09090B] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all active:translate-y-[3px]"
             data-cursor="pointer"
             aria-label={`Shopping Bag, ${cartCount} items`}
           >
             <ShoppingBag className="w-4 h-4" />
-            <span className="whitespace-nowrap font-mono-code font-bold">BAG</span>
-            <span className="flex items-center justify-center min-w-[20px] h-[20px] px-1 bg-[#D2E823] text-[#09090B] border border-[#09090B] rounded-[4px] text-[11px] font-mono-code font-bold">
+            <span className="hidden md:inline whitespace-nowrap font-mono-code font-bold text-xs uppercase tracking-wider">BAG</span>
+            <span className="hidden md:flex items-center justify-center min-w-[20px] h-[20px] px-1 bg-[#D2E823] text-[#09090B] border border-[#09090B] rounded-[4px] text-[11px] font-mono-code font-bold">
               {cartCount}
             </span>
+            <span className="md:hidden absolute -top-1.5 -right-1.5 flex items-center justify-center min-w-[18px] h-[18px] px-1 bg-[#D2E823] text-[#09090B] border border-[#09090B] rounded-full text-[10px] font-mono-code font-bold">
+              {cartCount}
+            </span>
+          </button>
+
+          {/* Mobile Hamburger Menu */}
+          <button className="md:hidden flex items-center justify-center p-2 border-2 border-[#09090B] bg-white text-[#09090B] rounded-[8px] shadow-hard-sm hover:bg-[#D2E823] hover:translate-y-[2px] hover:shadow-none transition-all" aria-label="Menu">
+            <Menu className="w-4 h-4" />
           </button>
         </div>
       </div>
     </header>
+
+    {showWelcomeToast && (
+      <div className="fixed top-24 left-1/2 -translate-x-1/2 z-50 p-4 bg-[#09090B] text-[#D2E823] font-mono-code text-xs font-bold uppercase border-2 border-[#D2E823] rounded-[10px] shadow-hard-lg animate-in slide-in-from-top-4 fade-in duration-300 flex items-center gap-3">
+        <span className="w-2.5 h-2.5 bg-[#D2E823] animate-pulse" />
+        <span>WELCOME BACK, {session?.user?.name?.split(" ")[0] || "OPERATOR"} // SYSTEM SYNCED</span>
+      </div>
+    )}
+    </>
   );
 };
 

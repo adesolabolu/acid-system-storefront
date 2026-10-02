@@ -60,6 +60,7 @@ export const DropsSection: React.FC<DropsSectionProps> = ({
             <div className="relative w-full aspect-square border-b-2 border-[#09090B] bg-[#18181B] overflow-hidden group">
               <ProductVisual
                 type={product.visualType}
+                identifier={product.slug || product.sku_code || product.id}
                 isSoldOut={product.isSoldOut}
                 telemetrySpec={product.telemetrySpec}
                 className="w-full h-full"

@@ -1,14 +1,16 @@
 import React from 'react';
 import { CadSchematic } from './CadSchematic';
+import { CADIllustration } from './CADIllustration';
 
 interface ProductVisualProps {
   type: string;
+  identifier?: string | number;
   className?: string;
   isSoldOut?: boolean;
   telemetrySpec?: string;
 }
 
-export const ProductVisual: React.FC<ProductVisualProps> = ({ type, className = '', isSoldOut = false, telemetrySpec }) => {
+export const ProductVisual: React.FC<ProductVisualProps> = ({ type, identifier, className = '', isSoldOut = false, telemetrySpec }) => {
   if (type === 'hero') {
     return (
       <div className={`relative w-full h-full flex items-center justify-center overflow-hidden bg-[#18181B] select-none ${className}`}>
@@ -58,7 +60,11 @@ export const ProductVisual: React.FC<ProductVisualProps> = ({ type, className = 
 
   return (
     <div className={`relative w-full h-full ${isSoldOut ? 'grayscale contrast-125 opacity-60' : ''} ${className}`}>
-      <CadSchematic type={type} telemetrySpec={telemetrySpec} className="w-full h-full" />
+      {identifier && identifier !== 'hero' ? (
+        <CADIllustration identifier={identifier} className="w-full h-full" />
+      ) : (
+        <CadSchematic type={type} telemetrySpec={telemetrySpec} className="w-full h-full" />
+      )}
     </div>
   );
 };
