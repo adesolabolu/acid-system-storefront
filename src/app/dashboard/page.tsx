@@ -18,20 +18,38 @@ export default async function DashboardPage() {
   // Fetch the user_id from the session (or directly from DB using email if session.user.id is undefined)
   let userId = (session.user as any).id;
   if (!userId) {
-    const userRes = await sql`SELECT id FROM users WHERE email = ${session.user.email} LIMIT 1`;
+    let userRes = await sql`SELECT id FROM users WHERE email = ${session.user.email} LIMIT 1`;
+    
+    if (userRes.length === 0) {
+      // Self-heal: Create user if they authenticated before the DB was ready
+      await sql`
+        INSERT INTO users (email, name, image)
+        VALUES (${session.user.email}, ${session.user.name || 'OPERATOR'}, ${session.user.image || ''})
+        ON CONFLICT (email) DO NOTHING
+      `;
+      userRes = await sql`SELECT id FROM users WHERE email = ${session.user.email} LIMIT 1`;
+    }
+    
     if (userRes.length === 0) {
       redirect('/');
     }
     userId = userRes[0].id;
   }
 
-  // Fetch past orders
-  const orders = await sql`
-    SELECT id, total_amount, currency, status, created_at
-    FROM orders
-    WHERE user_id = ${userId}
-    ORDER BY created_at DESC
-  `;
+  // Fetch past orders safely
+  let orders: any[] = [];
+  try {
+    orders = await sql`
+      SELECT id, total_amount, currency, status, created_at
+      FROM orders
+      WHERE user_id = ${userId}
+      ORDER BY created_at DESC
+    `;
+  } catch (e: any) {
+    if (!e.message?.includes('relation "orders" does not exist')) {
+      console.error('Error fetching orders:', e);
+    }
+  }
 
   const lifetimeYield = orders.reduce((sum, o) => sum + Number(o.total_amount), 0);
   const orderCount = orders.length;
