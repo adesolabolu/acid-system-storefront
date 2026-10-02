@@ -85,15 +85,6 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Zone 3: Action Buttons */}
         <div className="flex items-center gap-2 md:gap-3">
-          {/* Authentic Fashion Label Location & Currency Status Pill */}
-          <div
-            className="hidden lg:inline-flex items-center gap-2 px-3 py-1.5 text-xs font-mono-code font-bold uppercase tracking-wider bg-[#D2E823] text-[#09090B] border-2 border-[#09090B] rounded-[8px] shadow-hard-sm"
-            title="Atelier Region & Currency"
-          >
-            <span className="w-2 h-2 rounded-full bg-[#09090B] inline-block animate-ping" />
-            <span className="whitespace-nowrap">LAGOS // ₦ NGN</span>
-          </div>
-
           {/* Desktop Auth */}
           {status === "loading" ? (
             <div className="hidden md:flex items-center justify-center border-2 border-[#09090b] bg-[#D2E823] text-[#09090b] px-3 py-2 shadow-hard-sm">
@@ -178,12 +169,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                 ATELIER
               </Link>
             </nav>
-            <div className="pt-4 border-t-2 border-[#09090B]/20 flex items-center gap-2">
-              <div className="px-3 py-2 text-[10px] font-mono-code font-bold uppercase tracking-wider bg-[#D2E823] text-[#09090B] border-2 border-[#09090B] rounded-[8px] shadow-hard-sm w-full text-center flex items-center justify-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#09090B] animate-ping" />
-                LAGOS // ₦ NGN
-              </div>
-            </div>
           </div>
         )}
       </div>
