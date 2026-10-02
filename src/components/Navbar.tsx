@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { ShoppingBag, Sliders, Zap, Loader2, User, Menu } from 'lucide-react';
 import { GlitchText } from './GlitchText';
 import { useSession, signOut } from "next-auth/react";
+import { motion, AnimatePresence } from 'framer-motion';
 import { AuthModal } from './AuthModal';
 
 interface NavbarProps {
@@ -70,7 +71,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             SHOP
           </Link>
           <Link
-            href="/#bento"
+            href="/#dispatch-standard"
             className="hover:text-[#09090B] hover:underline underline-offset-4 decoration-2 decoration-[#09090B] transition-all"
           >
             COLLECTIONS
@@ -143,33 +144,41 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
 
         {/* Mobile Menu Dropdown */}
-        {isMobileMenuOpen && (
-          <div className="lg:hidden absolute top-[110%] left-0 right-0 p-4 bg-[#F8F4E8] border-2 border-[#09090B] rounded-[12px] shadow-hard-lg flex flex-col gap-4 animate-in slide-in-from-top-2 fade-in duration-200 z-50">
-            <nav className="flex flex-col gap-4 text-sm uppercase tracking-wider font-bold text-[#09090B]">
-              <Link
-                href="/shop"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="hover:text-[#D2E823] hover:underline underline-offset-4 decoration-2 decoration-[#09090B] transition-all"
-              >
-                SHOP
-              </Link>
-              <Link
-                href="/#bento"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="hover:text-[#D2E823] hover:underline underline-offset-4 decoration-2 decoration-[#09090B] transition-all"
-              >
-                COLLECTIONS
-              </Link>
-              <Link
-                href="/#manifesto"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="hover:text-[#D2E823] hover:underline underline-offset-4 decoration-2 decoration-[#09090B] transition-all"
-              >
-                ATELIER
-              </Link>
-            </nav>
-          </div>
-        )}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div 
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
+              className="lg:hidden absolute top-[110%] left-0 right-0 p-4 bg-[#F8F4E8] border-2 border-[#09090B] rounded-[12px] shadow-hard-lg flex flex-col gap-4 z-50"
+            >
+              <nav className="flex flex-col gap-4 text-sm uppercase tracking-wider font-bold text-[#09090B]">
+                <Link
+                  href="/shop"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="hover:text-[#D2E823] hover:underline underline-offset-4 decoration-2 decoration-[#09090B] transition-all"
+                >
+                  SHOP
+                </Link>
+                <Link
+                  href="/#dispatch-standard"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="hover:text-[#D2E823] hover:underline underline-offset-4 decoration-2 decoration-[#09090B] transition-all"
+                >
+                  COLLECTIONS
+                </Link>
+                <Link
+                  href="/#manifesto"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="hover:text-[#D2E823] hover:underline underline-offset-4 decoration-2 decoration-[#09090B] transition-all"
+                >
+                  ATELIER
+                </Link>
+              </nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </header>
 
