@@ -6,11 +6,15 @@ export interface CADIllustrationProps {
 }
 
 export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, className = '' }) => {
-  const idStr = String(identifier).toLowerCase();
+  const idStr = String(identifier).toLowerCase().trim();
 
   const illustrations: Record<string, React.ReactNode> = {
     "acid-sys-technical-blazer": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="180" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -50,7 +54,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "acid-1000": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="180" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -90,7 +98,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "1000": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="180" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -130,7 +142,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "neo-brutalist-trench-coat": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -167,7 +183,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "acid-1001": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -204,7 +224,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "1001": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -241,7 +265,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "asymmetric-wool-overcoat": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -275,7 +303,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "acid-1002": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -309,7 +341,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "1002": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -343,7 +379,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "cropped-flight-jacket": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="180" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -380,7 +420,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "acid-1003": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="180" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -417,7 +461,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "1003": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="180" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -454,7 +502,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "modular-utility-vest": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="180" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -486,7 +538,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "acid-1004": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="180" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -518,7 +574,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "1004": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="180" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -550,7 +610,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "deconstructed-wrap-blazer": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="180" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -583,7 +647,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "acid-1005": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="180" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -616,7 +684,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "1005": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="180" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -649,7 +721,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "oversized-poplin-shirt": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -688,7 +764,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "acid-1006": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -727,7 +807,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "1006": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -766,7 +850,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "geometric-panel-button-down": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -801,7 +889,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "acid-1007": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -836,7 +928,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "1007": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -871,7 +967,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "silk-utility-shirt": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -912,7 +1012,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "acid-1008": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -953,7 +1057,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "1008": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -994,7 +1102,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "asymmetric-collar-tunic": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -1029,7 +1141,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "acid-1009": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -1064,7 +1180,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "1009": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -1099,7 +1219,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "boxy-camp-collar-shirt": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -1134,7 +1258,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "acid-1010": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -1169,7 +1297,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "1010": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -1204,7 +1336,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "translucent-layering-shirt": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -1239,7 +1375,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "acid-1011": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -1274,7 +1414,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "1011": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -1309,7 +1453,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "structured-scuba-hoodie": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -1343,7 +1491,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "acid-1012": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -1377,7 +1529,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "1012": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -1411,7 +1567,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "brushed-cotton-mock-neck": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -1442,7 +1602,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "acid-1013": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -1473,7 +1637,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "1013": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -1504,7 +1672,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "heavyweight-graphic-tee": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -1532,7 +1704,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "acid-1014": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -1560,7 +1736,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "1014": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -1588,7 +1768,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "distressed-knit-sweater": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -1620,7 +1804,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "acid-1015": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -1652,7 +1840,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "1015": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -1684,7 +1876,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "oversized-french-terry-crewneck": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -1716,7 +1912,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "acid-1016": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -1748,7 +1948,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "1016": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -1780,7 +1984,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "panelled-zip-up-hoodie": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -1816,7 +2024,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "acid-1017": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -1852,7 +2064,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "1017": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -1888,7 +2104,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "wide-leg-technical-trousers": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -1921,7 +2141,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "acid-1018": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -1954,7 +2178,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "1018": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -1987,7 +2215,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "pleated-wool-trousers": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -2019,7 +2251,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "acid-1019": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -2051,7 +2287,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "1019": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -2083,7 +2323,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "cargo-parachute-pants": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -2119,7 +2363,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "acid-1020": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -2155,7 +2403,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "1020": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -2191,7 +2443,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "asymmetric-skort": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -2222,7 +2478,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "acid-1021": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -2253,7 +2513,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "1021": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -2284,7 +2548,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "tailored-bermuda-shorts": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -2318,7 +2586,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "acid-1022": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -2352,7 +2624,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "1022": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -2386,7 +2662,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "flared-denim-jeans": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -2419,7 +2699,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "acid-1023": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -2452,7 +2736,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "1023": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -2485,7 +2773,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "chunky-combat-boots": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="20" y1="168" x2="180" y2="168" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -2521,7 +2813,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "acid-1024": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="20" y1="168" x2="180" y2="168" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -2557,7 +2853,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "1024": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="20" y1="168" x2="180" y2="168" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -2593,7 +2893,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "molded-slip-on-mules": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="20" y1="165" x2="180" y2="165" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -2622,7 +2926,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "acid-1025": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="20" y1="165" x2="180" y2="165" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -2651,7 +2959,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "1025": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="20" y1="165" x2="180" y2="165" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -2680,7 +2992,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "square-toe-leather-derbies": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="20" y1="165" x2="180" y2="165" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -2714,7 +3030,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "acid-1026": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="20" y1="165" x2="180" y2="165" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -2748,7 +3068,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "1026": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="20" y1="165" x2="180" y2="165" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -2782,7 +3106,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "technical-harness-backpack": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -2815,7 +3143,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "acid-1027": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -2848,7 +3180,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "1027": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -2881,7 +3217,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "asymmetric-crossbody-bag": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -2910,7 +3250,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "acid-1028": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -2939,7 +3283,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "1028": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -2968,7 +3316,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "modular-belt-bag": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -2997,7 +3349,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "acid-1029": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -3026,7 +3382,11 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
         </svg>
     ),
     "1029": (
-      <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
+          <rect width="100%" height="100%" fill="#121316" />
+          <pattern id={`dotGrid-${idStr}`} width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+          <rect width="100%" height="100%" fill={`url(#dotGrid-${idStr})`} />
+
           <line x1="100" y1="20" x2="100" y2="185" stroke="#27272A" strokeDasharray="3 3" strokeWidth="1" />
 
           
@@ -3069,8 +3429,17 @@ export const CADIllustration: React.FC<CADIllustrationProps> = ({ identifier, cl
   }
 
   return (
-    <svg viewBox="0 0 200 200" className={`w-full h-full ${className}`} fill="none">
-      <rect width="200" height="200" fill="#121316" />
+    <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet" className={`w-full h-full ${className}`} fill="none">
+      <rect width="100%" height="100%" fill="#121316" />
+      <pattern id="dotGridFb" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff" opacity="0.15" /></pattern>
+      <rect width="100%" height="100%" fill="url(#dotGridFb)" />
+      
+      {/* Corner crosshairs */}
+      <path d="M10,10 L20,10 M10,10 L10,20" stroke="#3F3F46" strokeWidth="1" />
+      <path d="M190,10 L180,10 M190,10 L190,20" stroke="#3F3F46" strokeWidth="1" />
+      <path d="M10,190 L20,190 M10,190 L10,180" stroke="#3F3F46" strokeWidth="1" />
+      <path d="M190,190 L180,190 M190,190 L190,180" stroke="#3F3F46" strokeWidth="1" />
+      
       <text x="100" y="100" fill="#3F3F46" fontSize="10" fontFamily="monospace" textAnchor="middle">NO CAD FOR {idStr.toUpperCase()}</text>
     </svg>
   );
