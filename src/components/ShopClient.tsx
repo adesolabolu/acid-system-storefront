@@ -126,7 +126,7 @@ export default function ShopClient({ products }: ShopClientProps) {
             </div>
 
             {/* Categories */}
-            <div className="flex items-center gap-2 overflow-x-auto w-full lg:w-auto pb-2 lg:pb-0 no-scrollbar">
+            <div className="flex flex-wrap items-center gap-2 w-full lg:w-auto pb-2 lg:pb-0">
               {categories.map((cat) => (
                 <button
                   key={cat}
@@ -144,7 +144,7 @@ export default function ShopClient({ products }: ShopClientProps) {
           </div>
           
           {/* Sizes */}
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+          <div className="flex flex-wrap items-center gap-2 pb-1">
             <span className="font-mono-code text-[10px] font-bold text-[#09090B]/60 mr-2">SIZE:</span>
             {sizes.map((s) => (
               <button
