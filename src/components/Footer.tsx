@@ -7,14 +7,32 @@ export const Footer: React.FC = () => {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !email.includes('@')) return;
-    setSubmitted(true);
-    setTimeout(() => {
-      setEmail('');
-      setSubmitted(false);
-    }, 4000);
+    
+    setIsLoading(true);
+    try {
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      
+      if (response.ok) {
+        setSubmitted(true);
+        setTimeout(() => {
+          setEmail('');
+          setSubmitted(false);
+        }, 4000);
+      }
+    } catch (error) {
+      console.error('Failed to subscribe:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -55,11 +73,12 @@ export const Footer: React.FC = () => {
                 />
                 <button
                   type="submit"
-                  className="px-6 py-3.5 bg-[#D2E823] text-[#09090B] border-2 border-[#D2E823] font-mono-code font-bold text-xs uppercase tracking-wider rounded-[10px] shadow-hard-white hover:bg-white hover:border-white transition-all active:translate-y-1 flex items-center justify-center gap-2 whitespace-nowrap"
+                  disabled={isLoading}
+                  className="px-6 py-3.5 bg-[#D2E823] text-[#09090B] border-2 border-[#D2E823] font-mono-code font-bold text-xs uppercase tracking-wider rounded-[10px] shadow-hard-white hover:bg-white hover:border-white transition-all active:translate-y-1 flex items-center justify-center gap-2 whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
                   data-cursor="pointer"
                 >
-                  <span>JOIN DROPS</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <span>{isLoading ? 'ENROLLING...' : 'JOIN DROPS'}</span>
+                  {!isLoading && <ArrowRight className="w-4 h-4" />}
                 </button>
               </div>
             )}
