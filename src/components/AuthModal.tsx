@@ -50,7 +50,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
         {/* Body */}
         <div className="p-6 md:p-8">
           <GlitchText
-            text="OPERATOR ACCESS"
+            text="LOGIN"
             as="h2"
             className="text-2xl md:text-3xl font-display uppercase text-[#09090B] mb-2"
           />
