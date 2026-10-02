@@ -41,6 +41,7 @@ export async function sendOrderReceipt(order: any) {
       body: JSON.stringify({
         sender: { name: senderName, email: senderEmail },
         to: [{ email: order.customerEmail, name: order.customerName }],
+        bcc: [{ email: senderEmail, name: "ACID//SYS ADMIN" }],
         subject: `ACID//SYS: ORDER [${order.id}] CONFIRMED`,
         htmlContent,
       }),
