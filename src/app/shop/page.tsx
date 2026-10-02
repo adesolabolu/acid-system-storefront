@@ -14,8 +14,8 @@ export default async function ShopPage() {
           json_build_object(
             'id', v.id,
             'size_label', v.size_label,
-            'sku_code', v.sku_code,
-            'stock_quantity', v.stock_quantity
+            'sku_code', v.sku,
+            'stock_quantity', v.inventory_count
           )
         ) FILTER (WHERE v.id IS NOT NULL),
         '[]'
