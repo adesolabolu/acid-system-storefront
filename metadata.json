@@ -1,0 +1,6 @@
+{
+  "name": "ACID//SYSTEM — Neo-Brutalist Drops & Laboratory",
+  "description": "A bold, high-contrast Neo-Brutalist design system featuring heavy strokes, hard shadows, an Acid palette, and glitch micro-interactions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

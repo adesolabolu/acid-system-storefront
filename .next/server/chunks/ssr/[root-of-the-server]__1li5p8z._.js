@@ -1,0 +1,23 @@
+module.exports=[93695,(a,b,c)=>{b.exports=a.x("next/dist/shared/lib/no-fallback-error.external.js",()=>require("next/dist/shared/lib/no-fallback-error.external.js"))},76366,a=>{"use strict";var b=a.i(12948),c=a.i(67436),d=a.i(94331);a.i(70408);let e=(0,b.instrumentModuleGetter)(()=>a.r(50645)),f=(0,b.instrumentModuleGetter)(()=>a.r(43619)),g=(0,b.instrumentModuleGetter)(()=>a.r(13718)),h=(0,b.instrumentModuleGetter)(()=>a.r(18198)),i=(0,b.instrumentModuleGetter)(()=>a.r(62212)),j=["",{children:["shop",{children:["__PAGE__",{},{metadata:{},page:[(0,b.instrumentModuleGetter)(()=>a.r(68497)),"[project]/src/app/shop/page.tsx"]},[]]},{metadata:{}},[]]},{layout:[e,"[project]/src/app/layout.tsx"],"not-found":[f,"[project]/node_modules/next/dist/client/components/builtin/not-found.js"],forbidden:[g,"[project]/node_modules/next/dist/client/components/builtin/forbidden.js"],unauthorized:[h,"[project]/node_modules/next/dist/client/components/builtin/unauthorized.js"],"global-error":[i,"[project]/node_modules/next/dist/client/components/builtin/global-error.js"]},[]],k=a.r.bind(a),l=a.l.bind(a),m=(0,c.createAppPageEntrypoint)({tree:j,page:"/shop/page",pathname:"/shop",require:k,loadChunk:l,interopDefault:d.interopDefault}),n=m.__next_app__,o=m.routeModule,p=m.handler;a.s(["__next_app__",0,n,"handler",0,p,"routeModule",0,o],80575),a.i(80575);var q=a.i(22922);a.s(["ClientPageRoot",()=>q.ClientPageRoot,"ClientSegmentRoot",()=>q.ClientSegmentRoot,"Fragment",()=>q.Fragment,"HTTPAccessFallbackBoundary",()=>q.HTTPAccessFallbackBoundary,"InstantValidation",()=>q.InstantValidation,"LayoutRouter",()=>q.LayoutRouter,"LoadingBoundaryProvider",()=>q.LoadingBoundaryProvider,"Postpone",()=>q.Postpone,"RenderFromTemplateContext",()=>q.RenderFromTemplateContext,"RootLayoutBoundary",()=>q.RootLayoutBoundary,"SegmentViewNode",()=>q.SegmentViewNode,"SegmentViewStateNode",()=>q.SegmentViewStateNode,"__next_app__",0,n,"captureOwnerStack",()=>q.captureOwnerStack,"collectPrefetchHints",()=>q.collectPrefetchHints,"collectSegmentData",()=>q.collectSegmentData,"createElement",()=>q.createElement,"createMetadataComponents",()=>q.createMetadataComponents,"createPrerenderParamsForClientSegment",()=>q.createPrerenderParamsForClientSegment,"createPrerenderSearchParamsForClientPage",()=>q.createPrerenderSearchParamsForClientPage,"createServerParamsForServerSegment",()=>q.createServerParamsForServerSegment,"createServerSearchParamsForServerPage",()=>q.createServerSearchParamsForServerPage,"createTemporaryReferenceSet",()=>q.createTemporaryReferenceSet,"decodeAction",()=>q.decodeAction,"decodeFormState",()=>q.decodeFormState,"decodeReply",()=>q.decodeReply,"handler",0,p,"isEmptyHTMLPrelude",()=>q.isEmptyHTMLPrelude,"patchFetch",()=>q.patchFetch,"preconnect",()=>q.preconnect,"preloadFont",()=>q.preloadFont,"preloadStyle",()=>q.preloadStyle,"prerender",()=>q.prerender,"prerenderToNodeStream",()=>q.prerenderToNodeStream,"renderToPipeableStream",()=>q.renderToPipeableStream,"renderToReadableStream",()=>q.renderToReadableStream,"routeModule",0,o,"serverHooks",()=>q.serverHooks,"taintObjectReference",()=>q.taintObjectReference],76366)},96265,a=>{"use strict";a.s(["default",()=>b]);let b=(0,a.i(11857).registerClientReference)(function(){throw Error("Attempted to call the default export of [project]/src/components/ShopClient.tsx from the server, but it's on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.")},"[project]/src/components/ShopClient.tsx","default")},25447,a=>{"use strict";var b=a.i(96265);a.n(b)},43739,a=>{"use strict";var b=a.i(7997),c=a.i(61469),d=a.i(25447);async function e(){let a=(await c.sql`
+    SELECT 
+      p.*,
+      c.name as category_name,
+      COALESCE(
+        json_agg(
+          json_build_object(
+            'id', v.id,
+            'size_label', v.size_label,
+            'sku_code', v.sku_code,
+            'stock_quantity', v.stock_quantity
+          )
+        ) FILTER (WHERE v.id IS NOT NULL),
+        '[]'
+      ) as variants
+    FROM products p
+    LEFT JOIN categories c ON p.category_id = c.id
+    LEFT JOIN product_variants v ON p.id = v.product_id
+    GROUP BY p.id, c.name
+    ORDER BY p.id ASC
+  `).map(a=>({...a,price:Number(a.base_price),category:a.category_name||"Uncategorized",isSoldOut:!a.in_stock,edition:a.badge||"NEW",tag:a.badge||"NEW",visualType:a.cad_type,telemetrySpec:a.telemetry_spec}));return(0,b.jsx)(d.default,{products:a})}a.s(["default",0,e,"revalidate",0,0])},68497,function(a){a.n(a.i(43739))}];
+
+//# sourceMappingURL=%5Broot-of-the-server%5D__1li5p8z._.js.map
