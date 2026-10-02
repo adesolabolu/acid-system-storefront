@@ -20,6 +20,8 @@ export const metadata: Metadata = {
   description: 'ACID//SYS READY-TO-WEAR',
 };
 
+import { CartProvider } from '@/components/CartContext';
+
 export default function RootLayout({
   children,
 }: {
@@ -28,7 +30,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${delaGothicOne.variable} ${spaceGrotesk.variable}`}>
-        <SessionWrapper>{children}</SessionWrapper>
+        <SessionWrapper>
+          <CartProvider>
+            {children}
+          </CartProvider>
+        </SessionWrapper>
       </body>
     </html>
   );
