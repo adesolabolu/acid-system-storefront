@@ -19,6 +19,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   const { data: session, status } = useSession();
   const [showWelcomeToast, setShowWelcomeToast] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     if (status === 'authenticated') {
@@ -48,6 +49,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Zone 1: Brand Wordmark in Dela Gothic One */}
         <Link
           href="/"
+          onClick={() => setIsMobileMenuOpen(false)}
           className="flex items-center gap-2 group focus-visible:outline-none"
           aria-label="ACID//SYSTEM Home"
         >
@@ -141,10 +143,49 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           {/* Mobile Hamburger Menu */}
-          <button className="md:hidden flex items-center justify-center p-2 border-2 border-[#09090B] bg-white text-[#09090B] rounded-[8px] shadow-hard-sm hover:bg-[#D2E823] hover:translate-y-[2px] hover:shadow-none transition-all" aria-label="Menu">
+          <button 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className={`lg:hidden flex items-center justify-center p-2 border-2 border-[#09090B] rounded-[8px] transition-all ${isMobileMenuOpen ? 'bg-[#09090B] text-[#D2E823] shadow-none translate-y-[2px]' : 'bg-white text-[#09090B] shadow-hard-sm hover:bg-[#D2E823] hover:translate-y-[2px] hover:shadow-none'}`}
+            aria-label="Menu"
+          >
             <Menu className="w-4 h-4" />
           </button>
         </div>
+
+        {/* Mobile Menu Dropdown */}
+        {isMobileMenuOpen && (
+          <div className="lg:hidden absolute top-[110%] left-0 right-0 p-4 bg-[#F8F4E8] border-2 border-[#09090B] rounded-[12px] shadow-hard-lg flex flex-col gap-4 animate-in slide-in-from-top-2 fade-in duration-200 z-50">
+            <nav className="flex flex-col gap-4 text-sm uppercase tracking-wider font-bold text-[#09090B]">
+              <Link
+                href="/shop"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="hover:text-[#D2E823] hover:underline underline-offset-4 decoration-2 decoration-[#09090B] transition-all"
+              >
+                SHOP
+              </Link>
+              <Link
+                href="/#bento"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="hover:text-[#D2E823] hover:underline underline-offset-4 decoration-2 decoration-[#09090B] transition-all"
+              >
+                COLLECTIONS
+              </Link>
+              <Link
+                href="/#manifesto"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="hover:text-[#D2E823] hover:underline underline-offset-4 decoration-2 decoration-[#09090B] transition-all"
+              >
+                ATELIER
+              </Link>
+            </nav>
+            <div className="pt-4 border-t-2 border-[#09090B]/20 flex items-center gap-2">
+              <div className="px-3 py-2 text-[10px] font-mono-code font-bold uppercase tracking-wider bg-[#D2E823] text-[#09090B] border-2 border-[#09090B] rounded-[8px] shadow-hard-sm w-full text-center flex items-center justify-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#09090B] animate-ping" />
+                LAGOS // ₦ NGN
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </header>
 
