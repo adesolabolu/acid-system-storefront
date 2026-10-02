@@ -93,11 +93,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           ) : status === "unauthenticated" ? (
             <button onClick={() => setShowAuthModal(true)} className="hidden md:inline-block border-2 border-[#09090b] bg-[#D2E823] text-[#09090b] font-mono-code text-[11px] uppercase px-3 py-2 font-bold shadow-[2px_2px_0px_#09090b] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">LOGIN</button>
           ) : status === "authenticated" ? (
-            <div className="hidden md:flex items-center gap-2 border-2 border-[#09090b] bg-[#F8F4E8] px-2.5 py-1.5 shadow-hard-sm text-xs font-mono-code">
-              <span className="text-[#09090b] font-bold">OP // {session.user?.name?.split(" ")[0] || "AUTH"}</span>
-              <Link href="/dashboard" className="text-[10px] text-[#09090b] hover:underline uppercase font-bold px-1">[DASHBOARD]</Link>
-              <button onClick={() => { localStorage.removeItem('acidsys_cart'); signOut(); }} className="text-[10px] text-red-600 hover:underline uppercase font-bold px-1">[EXIT]</button>
-            </div>
+            <Link href="/dashboard" className="hidden md:flex items-center gap-2 border-2 border-[#09090b] bg-[#F8F4E8] px-2.5 py-1.5 shadow-hard-sm text-xs font-mono-code hover:translate-y-[2px] hover:shadow-none transition-all group">
+              <User className="w-3.5 h-3.5 text-[#09090b]" />
+              <span className="text-[#09090b] font-bold uppercase group-hover:underline underline-offset-2">OP // {session.user?.name?.split(" ")[0] || "AUTH"}</span>
+            </Link>
           ) : null}
 
           {/* Mobile Auth Icon */}

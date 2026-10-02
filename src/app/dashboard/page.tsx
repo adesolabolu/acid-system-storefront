@@ -5,6 +5,7 @@ import { sql } from '@/lib/db';
 import Link from 'next/link';
 import { GlitchText } from '@/components/GlitchText';
 import { ArrowLeft } from 'lucide-react';
+import { LogoutButton } from '@/components/LogoutButton';
 
 export const revalidate = 0;
 
@@ -98,6 +99,9 @@ export default async function DashboardPage() {
               <span>ACCESS LEVEL:</span>
               <span className="text-[#D2E823]">TIER 1 (VERIFIED)</span>
             </div>
+          </div>
+          <div className="mt-8 sm:w-64 relative z-10">
+            <LogoutButton />
           </div>
         </div>
 
