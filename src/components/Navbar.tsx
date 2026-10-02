@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { ShoppingBag, Sliders, Zap, Loader2, User, Menu } from 'lucide-react';
 import { GlitchText } from './GlitchText';
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
+import { AuthModal } from './AuthModal';
 
 interface NavbarProps {
   cartCount: number;
@@ -17,6 +18,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const { data: session, status } = useSession();
   const [showWelcomeToast, setShowWelcomeToast] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   useEffect(() => {
     if (status === 'authenticated') {
@@ -26,8 +28,18 @@ export const Navbar: React.FC<NavbarProps> = ({
         sessionStorage.setItem('acidsys_welcomed', 'true');
         setTimeout(() => setShowWelcomeToast(false), 4000);
       }
+
+      const wantsNewsletter = localStorage.getItem('acidsys_newsletter_pending');
+      if (wantsNewsletter && session?.user?.email) {
+        fetch('/api/newsletter', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: session.user.email }),
+        }).catch(console.error);
+        localStorage.removeItem('acidsys_newsletter_pending');
+      }
     }
-  }, [status]);
+  }, [status, session]);
 
   return (
     <>
@@ -86,7 +98,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <Loader2 className="w-4 h-4 animate-spin" />
             </div>
           ) : status === "unauthenticated" ? (
-            <button onClick={() => signIn("google")} className="hidden md:inline-block border-2 border-[#09090b] bg-[#D2E823] text-[#09090b] font-mono-code text-[11px] uppercase px-3 py-2 font-bold shadow-[2px_2px_0px_#09090b] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">SIGN IN WITH GOOGLE</button>
+            <button onClick={() => setShowAuthModal(true)} className="hidden md:inline-block border-2 border-[#09090b] bg-[#D2E823] text-[#09090b] font-mono-code text-[11px] uppercase px-3 py-2 font-bold shadow-[2px_2px_0px_#09090b] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">OPERATOR ACCESS</button>
           ) : status === "authenticated" ? (
             <div className="hidden md:flex items-center gap-2 border-2 border-[#09090b] bg-[#F8F4E8] px-2.5 py-1.5 shadow-hard-sm text-xs font-mono-code">
               <span className="text-[#09090b] font-bold">OP // {session.user?.name?.split(" ")[0] || "AUTH"}</span>
@@ -102,7 +114,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <Loader2 className="w-4 h-4 animate-spin" />
               </div>
             ) : status === "unauthenticated" ? (
-              <button onClick={() => signIn("google")} className="p-2 border-2 border-[#09090b] bg-white text-[#09090b] rounded-[8px] shadow-hard-sm hover:translate-y-[2px] hover:shadow-none transition-all flex items-center justify-center" aria-label="Sign In">
+              <button onClick={() => setShowAuthModal(true)} className="p-2 border-2 border-[#09090b] bg-white text-[#09090b] rounded-[8px] shadow-hard-sm hover:translate-y-[2px] hover:shadow-none transition-all flex items-center justify-center" aria-label="Sign In">
                 <User className="w-4 h-4" />
               </button>
             ) : status === "authenticated" ? (
@@ -142,6 +154,8 @@ export const Navbar: React.FC<NavbarProps> = ({
         <span>WELCOME BACK, {session?.user?.name?.split(" ")[0] || "OPERATOR"} // SYSTEM SYNCED</span>
       </div>
     )}
+
+    <AuthModal isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} />
     </>
   );
 };
