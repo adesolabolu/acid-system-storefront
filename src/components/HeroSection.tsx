@@ -123,7 +123,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </div>
 
           {/* Telemetry Asset Card: flows below image on mobile (relative mt-5), floats on desktop (sm:absolute sm:-bottom-8 sm:-left-8) */}
-          <div className="relative mt-5 w-full sm:w-72 sm:absolute sm:mt-0 sm:-bottom-8 sm:-left-8 z-20 p-4 bg-[#F8F4E8] border-2 border-[#09090B] rounded-[16px] shadow-hard-lg sm:animate-float">
+          <div className="hidden sm:block relative mt-5 w-full sm:w-72 sm:absolute sm:mt-0 sm:-bottom-8 sm:-left-8 z-20 p-4 bg-[#F8F4E8] border-2 border-[#09090B] rounded-[16px] shadow-hard-lg sm:animate-float">
             <div className="flex items-start justify-between mb-2">
               <span className="inline-block px-2 py-0.5 bg-[#09090B] text-[#D2E823] text-[10px] font-mono-code font-bold uppercase rounded-[4px]">
                 LIVE TELEMETRY
