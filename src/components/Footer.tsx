@@ -172,10 +172,16 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom copyright & attribution */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono-code text-xs text-[#F8F4E8]/60">
-          <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 bg-[#D2E823]" />
-            <span>ACID//SYSTEM © 2026. ALL RIGHTS RESERVED.</span>
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 font-mono-code text-xs text-[#F8F4E8]/60">
+          <div className="flex flex-col md:flex-row items-center gap-6">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 bg-[#D2E823]" />
+              <span>ACID//SYSTEM © 2026. ALL RIGHTS RESERVED.</span>
+            </div>
+            <div className="flex gap-4">
+              <a href="/privacy" className="hover:text-[#D2E823] transition-colors">PRIVACY POLICY</a>
+              <a href="/terms" className="hover:text-[#D2E823] transition-colors">TERMS OF SERVICE</a>
+            </div>
           </div>
           <div>
             <span>NEO-BRUTALIST ARCHITECTURE · ZERO BLUR SHADOW PROTOCOL</span>
