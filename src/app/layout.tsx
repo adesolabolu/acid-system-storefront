@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Dela_Gothic_One, Space_Grotesk } from 'next/font/google';
 import './globals.css';
+import SessionWrapper from '@/components/SessionWrapper';
 
 const delaGothicOne = Dela_Gothic_One({
   subsets: ['latin'],
@@ -27,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${delaGothicOne.variable} ${spaceGrotesk.variable}`}>
-        {children}
+        <SessionWrapper>{children}</SessionWrapper>
       </body>
     </html>
   );

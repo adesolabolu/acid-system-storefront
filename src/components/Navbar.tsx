@@ -3,6 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import { ShoppingBag, Sliders, Zap } from 'lucide-react';
 import { GlitchText } from './GlitchText';
+import { useSession, signIn, signOut } from "next-auth/react";
 
 interface NavbarProps {
   cartCount: number;
@@ -14,6 +15,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   cartCount,
   onOpenCart,
 }) => {
+  const { data: session, status } = useSession();
   return (
     <header className="sticky top-4 z-40 mx-4 md:mx-8 mb-6">
       <div className="flex items-center justify-between px-5 md:px-7 py-3.5 bg-[#F8F4E8]/90 backdrop-blur-[24px] border-2 border-[#09090B] rounded-[12px] shadow-hard">
@@ -63,6 +65,15 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span className="w-2 h-2 rounded-full bg-[#09090B] inline-block animate-ping" />
             <span className="whitespace-nowrap">LAGOS // ₦ NGN</span>
           </div>
+
+          {status === "unauthenticated" ? (
+            <button onClick={() => signIn("google")} className="hidden md:inline-block border-2 border-[#09090b] bg-[#D2E823] text-[#09090b] font-mono-code text-[11px] uppercase px-3 py-2 font-bold shadow-[2px_2px_0px_#09090b] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">SIGN IN WITH GOOGLE</button>
+          ) : status === "authenticated" ? (
+            <div className="hidden md:flex items-center gap-2 border-2 border-[#09090b] bg-[#F8F4E8] px-2.5 py-1.5 shadow-hard-sm text-xs font-mono-code">
+              <span className="text-[#09090b] font-bold">OP // {session.user?.name?.split(" ")[0] || "AUTH"}</span>
+              <button onClick={() => signOut()} className="text-[10px] text-red-600 hover:underline uppercase font-bold">[EXIT]</button>
+            </div>
+          ) : null}
 
           <button
             onClick={onOpenCart}

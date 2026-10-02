@@ -1,5 +1,6 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSession } from "next-auth/react";
 import { ArrowRight, Check, Minus, Plus, ShoppingBag, Trash2, X } from 'lucide-react';
 import { CartItem } from '../types';
 import { GlitchText } from './GlitchText';
@@ -27,6 +28,17 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   const [showCheckoutForm, setShowCheckoutForm] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', address: '' });
   const [createdOrderId, setCreatedOrderId] = useState<string | null>(null);
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (session?.user) {
+      setFormData(prev => ({
+        ...prev,
+        name: prev.name || session.user?.name || '',
+        email: prev.email || session.user?.email || '',
+      }));
+    }
+  }, [session?.user]);
 
   if (!isOpen) return null;
 
