@@ -40,7 +40,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           <div className="space-y-1 mb-6 max-w-full">
             <div>
               <GlitchText
-                text="ARCHITECTURAL"
+                text="ENGINEERED"
                 as="h1"
                 className="text-[2.5rem] sm:text-[3.6rem] md:text-[4.5rem] xl:text-[5.5rem] leading-[0.85] text-[#09090B] block whitespace-nowrap"
               />
