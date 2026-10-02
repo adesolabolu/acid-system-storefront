@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { X, Check } from 'lucide-react';
 import { signIn } from 'next-auth/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { GlitchText } from './GlitchText';
 
 interface AuthModalProps {
@@ -12,8 +13,6 @@ interface AuthModalProps {
 export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
   const [optIn, setOptIn] = useState(true);
   const [isConnecting, setIsConnecting] = useState(false);
-
-  if (!isOpen) return null;
 
   const handleSignIn = () => {
     setIsConnecting(true);
@@ -26,14 +25,26 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-      <div 
-        className="absolute inset-0 bg-[#09090B]/60 backdrop-blur-sm"
-        onClick={onClose}
-      />
-      
-      <div className="relative w-full max-w-md bg-[#F8F4E8] border-2 border-[#09090B] rounded-[16px] shadow-hard-lg overflow-hidden animate-in fade-in zoom-in-95 duration-200">
-        {/* Header */}
+    <AnimatePresence>
+      {isOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="absolute inset-0 bg-[#09090B]/60 backdrop-blur-sm"
+            onClick={onClose}
+          />
+          
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
+            className="relative w-full max-w-md bg-[#F8F4E8] border-2 border-[#09090B] rounded-[16px] shadow-hard-lg overflow-hidden"
+          >
+            {/* Header */}
         <div className="bg-[#09090B] text-[#D2E823] p-4 flex items-center justify-between border-b-2 border-[#09090B]">
           <div className="font-mono-code font-bold text-xs uppercase tracking-widest flex items-center gap-2">
             <span className="w-2 h-2 bg-[#D2E823] rounded-full animate-pulse" />
@@ -98,9 +109,11 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
               <span className="font-bold">ENROLL IN PRIORITY ALERTS</span>
               <p className="text-[#09090B]/60 mt-1">Receive encrypted batch release notices prior to public drops. Zero spam.</p>
             </div>
+            </div>
           </div>
+        </motion.div>
         </div>
-      </div>
-    </div>
+      )}
+    </AnimatePresence>
   );
 };

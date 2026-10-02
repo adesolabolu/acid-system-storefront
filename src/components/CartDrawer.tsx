@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSession } from "next-auth/react";
 import { ArrowRight, Check, Minus, Plus, ShoppingBag, Trash2, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { CartItem } from '../types';
 import { GlitchText } from './GlitchText';
 import { ProductVisual } from './ProductVisual';
@@ -39,8 +40,6 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
       }));
     }
   }, [session?.user]);
-
-  if (!isOpen) return null;
 
   const subtotal = items.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
   const shippingThreshold = 200000;
@@ -96,12 +95,26 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-[#09090B]/60 backdrop-blur-sm">
-      <div
-        className="w-full max-w-md bg-[#F8F4E8] border-l-2 border-[#09090B] h-full shadow-hard-xl flex flex-col justify-between overflow-hidden"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Drawer Header */}
+    <AnimatePresence>
+      {isOpen && (
+        <div className="fixed inset-0 z-[100] flex justify-end">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="absolute inset-0 bg-[#09090B]/60 backdrop-blur-sm"
+            onClick={onClose}
+          />
+          <motion.div
+            initial={{ transform: "translateX(100%)" }}
+            animate={{ transform: "translateX(0%)" }}
+            exit={{ transform: "translateX(100%)" }}
+            transition={{ duration: 0.3, ease: [0.32, 0.72, 0, 1] }}
+            className="relative w-full max-w-md bg-[#F8F4E8] border-l-2 border-[#09090B] h-full shadow-hard-xl flex flex-col justify-between overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Drawer Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b-2 border-[#09090B] bg-[#F8F4E8]">
           <div className="flex items-center gap-2">
             <ShoppingBag className="w-5 h-5 text-[#09090B]" />
@@ -315,8 +328,10 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
             )}
           </div>
         )}
-      </div>
-    </div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
   );
 };
 

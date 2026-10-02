@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { Check, Plus, Shield, X, Zap } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Product } from '../types';
 import { GlitchText } from './GlitchText';
 import { ProductVisual } from './ProductVisual';
@@ -21,8 +22,6 @@ export const ProductModal: React.FC<ProductModalProps> = ({
   const [selectedSize, setSelectedSize] = useState<string>('L');
   const [justAdded, setJustAdded] = useState<boolean>(false);
 
-  if (!isOpen || !product) return null;
-
   const sizes = ['S', 'M', 'L', 'XL'];
 
   const handleAdd = () => {
@@ -36,11 +35,25 @@ export const ProductModal: React.FC<ProductModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#09090B]/70 backdrop-blur-sm">
-      <div
-        className="relative w-full max-w-3xl bg-[#F8F4E8] border-2 border-[#09090B] rounded-[24px] shadow-hard-xl overflow-hidden max-h-[90vh] flex flex-col"
-        onClick={(e) => e.stopPropagation()}
-      >
+    <AnimatePresence>
+      {isOpen && product && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="absolute inset-0 bg-[#09090B]/70 backdrop-blur-sm"
+            onClick={onClose}
+          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
+            className="relative w-full max-w-3xl bg-[#F8F4E8] border-2 border-[#09090B] rounded-[24px] shadow-hard-xl overflow-hidden max-h-[90vh] flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
         {/* Top bar */}
         <div className="flex items-center justify-between px-6 py-4 border-b-2 border-[#09090B] bg-[#F8F4E8]">
           <div className="flex items-center gap-2">
@@ -188,8 +201,10 @@ export const ProductModal: React.FC<ProductModalProps> = ({
             </div>
           </div>
         </div>
+        </motion.div>
       </div>
-    </div>
+      )}
+    </AnimatePresence>
   );
 };
 
