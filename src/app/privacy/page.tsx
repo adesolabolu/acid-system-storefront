@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
@@ -5,7 +7,7 @@ import { Footer } from '@/components/Footer';
 export default function PrivacyPage() {
   return (
     <div className="min-h-screen bg-[#09090B] text-[#F8F4E8] font-sans selection:bg-[#D2E823] selection:text-[#09090B] flex flex-col">
-      <Navbar />
+      <Navbar cartCount={0} onOpenCart={() => {}} />
       <main className="flex-1 pt-32 pb-24 px-4 md:px-8 max-w-4xl mx-auto w-full">
         <div className="mb-12">
           <div className="font-mono-code text-xs text-[#D2E823] font-bold uppercase tracking-widest mb-4">
