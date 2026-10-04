@@ -13,7 +13,7 @@ export async function GET(req: Request) {
       SELECT ci.id, ci.product_sku, ci.quantity, ci.size,
              p.name as product_name, p.base_price, p.slug, p.cad_type
       FROM cart_items ci
-      LEFT JOIN products p ON ci.product_sku = p.sku_code
+      LEFT JOIN products p ON ci.product_sku = p.sku_code OR ci.product_sku = p.id::text
       WHERE ci.user_id = ${user.userId}
       ORDER BY ci.updated_at DESC
     `;

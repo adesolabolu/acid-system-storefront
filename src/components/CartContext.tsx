@@ -22,7 +22,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const fetchCart = useCallback(async () => {
     if (status !== 'authenticated') return;
     try {
-      const res = await fetch('/api/cart');
+      const res = await fetch('/api/cart', { headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' } });
       const data = await res.json();
       if (data.cart) {
         const mapped: CartItem[] = data.cart.map((item: any) => ({
