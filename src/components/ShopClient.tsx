@@ -126,12 +126,12 @@ export default function ShopClient({ products }: ShopClientProps) {
             </div>
 
             {/* Categories */}
-            <div className="flex flex-wrap items-center gap-2 w-full lg:w-auto pb-2 lg:pb-0">
+            <div className="flex items-center gap-2 w-full lg:w-auto pb-2 lg:pb-0 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
               {categories.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-3 py-1.5 font-mono-code text-[10px] font-bold uppercase tracking-wider rounded-[6px] border-2 border-[#09090B] whitespace-nowrap transition-all ${
+                  className={`shrink-0 px-3 py-1.5 font-mono-code text-[10px] font-bold uppercase tracking-wider rounded-[6px] border-2 border-[#09090B] whitespace-nowrap transition-all ${
                     selectedCategory === cat
                       ? 'bg-[#09090B] text-[#D2E823] shadow-hard-sm'
                       : 'bg-white text-[#09090B] hover:bg-[#D2E823]'
@@ -144,13 +144,13 @@ export default function ShopClient({ products }: ShopClientProps) {
           </div>
           
           {/* Sizes */}
-          <div className="flex flex-wrap items-center gap-2 pb-1">
-            <span className="font-mono-code text-[10px] font-bold text-[#09090B]/60 mr-2">SIZE:</span>
+          <div className="flex items-center gap-2 pb-1 w-full overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            <span className="font-mono-code text-[10px] font-bold text-[#09090B]/60 mr-2 shrink-0">SIZE:</span>
             {sizes.map((s) => (
               <button
                 key={s}
                 onClick={() => setSelectedSize(s)}
-                className={`px-2 py-1 font-mono-code text-[10px] font-bold uppercase rounded-[4px] border border-[#09090B] whitespace-nowrap transition-all ${
+                className={`shrink-0 px-2 py-1 font-mono-code text-[10px] font-bold uppercase rounded-[4px] border border-[#09090B] whitespace-nowrap transition-all ${
                   selectedSize === s
                     ? 'bg-[#09090B] text-[#D2E823]'
                     : 'bg-transparent text-[#09090B] hover:bg-[#D2E823]'
