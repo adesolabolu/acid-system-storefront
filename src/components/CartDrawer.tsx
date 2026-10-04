@@ -105,7 +105,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[100] flex justify-end">
+        <div className="fixed inset-0 z-[300] flex justify-end">
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
