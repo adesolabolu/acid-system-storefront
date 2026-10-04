@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Check, Plus, Shield, X, Zap } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Product } from '../types';
@@ -23,6 +23,18 @@ export const ProductModal: React.FC<ProductModalProps> = ({
   const [justAdded, setJustAdded] = useState<boolean>(false);
 
   const sizes = ['S', 'M', 'L', 'XL'];
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
 
   const handleAdd = () => {
     if (product.isSoldOut) return;

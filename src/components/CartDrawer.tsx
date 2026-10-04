@@ -41,6 +41,18 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
     }
   }, [session?.user]);
 
+  // Lock body scroll when drawer is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   const subtotal = items.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
   const shippingThreshold = 200000;
   const shippingCost = 15000;
