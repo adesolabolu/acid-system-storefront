@@ -31,13 +31,14 @@ jobs:
       - name: Run Expo iOS Prebuild
         run: npx expo prebuild --platform ios --clean
 
-      - name: Install CocoaPods
+      - name: Configure Node for Xcode & Install CocoaPods
         run: |
+          echo "export NODE_BINARY=$(which node)" > ios/.xcode.env.local
           cd ios
           pod install --repo-update
           cd ..
 
-      - name: Build Unsigned Xcode Project
+      - name: Build Ad-Hoc Xcode Project
         run: |
           SCHEME_NAME=$(xcodebuild -workspace ios/*.xcworkspace -list | awk '/Schemes:/{flag=1;next} flag{print $1;exit}')
           echo "Detected scheme: $SCHEME_NAME"
@@ -47,9 +48,12 @@ jobs:
             -sdk iphoneos \
             -destination 'generic/platform=iOS' \
             -derivedDataPath ios/build \
-            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_ALLOWED=YES \
             CODE_SIGNING_REQUIRED=NO \
-            CODE_SIGN_IDENTITY="" \
+            CODE_SIGN_IDENTITY="-" \
+            AD_HOC_CODE_SIGNING_ALLOWED=YES \
+            DEVELOPMENT_TEAM="" \
+            PROVISIONING_PROFILE_SPECIFIER="" \
             build
 
       - name: Package Payload into IPA
