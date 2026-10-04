@@ -22,13 +22,13 @@ export const NativeCategoryGrid = () => {
           <Link 
             key={i} 
             href={cat.href}
-            className={`relative p-4 flex flex-col justify-between aspect-square rounded-[16px] border-2 border-[#09090B] shadow-hard-sm active:translate-y-[2px] active:shadow-none transition-all ${cat.bg} ${cat.colSpan ? 'col-span-2 aspect-[21/9]' : ''}`}
+            className={`relative p-4 flex flex-col h-40 sm:h-48 rounded-[16px] border-2 border-[#09090B] shadow-hard-sm active:translate-y-[2px] active:shadow-none transition-all ${cat.bg} ${cat.colSpan ? 'col-span-2' : ''}`}
           >
-            <div className={`absolute top-4 right-4 ${cat.text}`}>
-              <ArrowUpRight className="w-5 h-5" />
-            </div>
-            <div className={`font-display text-xl uppercase ${cat.text}`}>
+            <div className={`font-display text-xl uppercase pr-6 ${cat.text}`}>
               {cat.name}
+            </div>
+            <div className={`absolute bottom-4 right-4 ${cat.text}`}>
+              <ArrowUpRight className="w-5 h-5" />
             </div>
           </Link>
         ))}

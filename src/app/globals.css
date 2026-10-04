@@ -254,3 +254,8 @@ html.is-native-app .native-product-grid .font-display.text-lg {
 html.is-native-app .native-product-grid .text-sm {
   font-size: 0.75rem !important;
 }
+
+/* Add extra padding to the top of the hero section on mobile app */
+html.is-native-app #hero {
+  padding-top: 2.5rem !important;
+}

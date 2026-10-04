@@ -74,8 +74,8 @@ export default function ClientStorefront({ initialProducts }: { initialProducts:
       
       <main className="flex-1">
         <HeroSection onExploreDrops={handleScrollToDrops} onOpenQuickView={(id) => handleOpenQuickViewById(id)} />
-        <NativeCategoryGrid />
         <MarqueeBanner theme="acid" />
+        <NativeCategoryGrid />
         <BentoCategoryGrid />
         <DropsSection
           products={products}
