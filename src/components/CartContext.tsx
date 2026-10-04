@@ -79,9 +79,15 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, [status, fetchCart]);
 
   const addToCart = async (product: Product, size: string) => {
+    const sku = product.sku_code;
+    if (!sku) {
+      console.error('Product is missing SKU code');
+      return;
+    }
+
     // Optimistic UI update
     setCart((prev) => {
-      const idx = prev.findIndex(i => (i.product.sku_code || i.product.id) === (product.sku_code || product.id) && i.size === size);
+      const idx = prev.findIndex(i => i.product.sku_code === sku && i.size === size);
       if (idx > -1) {
         const next = [...prev];
         next[idx].quantity += 1;
@@ -91,7 +97,6 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     });
 
     if (status === 'authenticated') {
-      const sku = product.sku_code || String(product.id);
       await fetch('/api/cart', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -103,7 +108,8 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const updateQuantity = async (productId: string | number, size: string, delta: number) => {
     const item = cart.find(i => i.product.id === productId && i.size === size);
     if (!item) return;
-    const sku = item.product.sku_code || String(item.product.id);
+    const sku = item.product.sku_code;
+    if (!sku) return;
     
     if (item.quantity + delta <= 0) {
       removeItem(productId, size);
@@ -127,7 +133,8 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const removeItem = async (productId: string | number, size: string) => {
     const item = cart.find(i => i.product.id === productId && i.size === size);
     if (!item) return;
-    const sku = item.product.sku_code || String(item.product.id);
+    const sku = item.product.sku_code;
+    if (!sku) return;
 
     // Optimistic
     setCart(prev => prev.filter(i => !(i.product.id === productId && i.size === size)));
