@@ -7,6 +7,7 @@ import { CustomCursor } from './CustomCursor';
 import { DropsSection } from './DropsSection';
 import { Footer } from './Footer';
 import { HeroSection } from './HeroSection';
+import { NativeCategoryGrid } from './NativeCategoryGrid';
 import { MarqueeBanner } from './MarqueeBanner';
 import { ManifestoSection } from './ManifestoSection';
 import { Navbar } from './Navbar';
@@ -73,6 +74,7 @@ export default function ClientStorefront({ initialProducts }: { initialProducts:
       
       <main className="flex-1">
         <HeroSection onExploreDrops={handleScrollToDrops} onOpenQuickView={(id) => handleOpenQuickViewById(id)} />
+        <NativeCategoryGrid />
         <MarqueeBanner theme="acid" />
         <BentoCategoryGrid />
         <DropsSection

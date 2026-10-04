@@ -102,7 +102,7 @@ export default function ShopClient({ products }: ShopClientProps) {
         </header>
 
         {/* Sticky Filter Bar */}
-        <div className="sticky top-[88px] z-30 bg-[#F8F4E8] border-y-2 border-[#09090B] py-4 mb-10 flex flex-col gap-4 shadow-sm">
+        <div className="sticky top-[88px] z-30 bg-[#F8F4E8] border-y-2 border-[#09090B] py-4 mb-10 flex flex-col gap-4 shadow-sm native-unsticky">
           <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
             {/* Search & Sort */}
             <div className="flex items-center gap-4 w-full lg:w-auto">
@@ -191,7 +191,7 @@ export default function ShopClient({ products }: ShopClientProps) {
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 native-product-grid">
           {filteredProducts.map((product) => (
             <div
               key={product.id}
