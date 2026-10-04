@@ -20,15 +20,20 @@ export const metadata: Metadata = {
   description: 'ACID//SYS READY-TO-WEAR',
 };
 
+import { headers } from 'next/headers';
 import { CartProvider } from '@/components/CartContext';
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const headersList = await headers();
+  const userAgent = headersList.get('user-agent') || '';
+  const isNativeApp = userAgent.includes('AcidSysMobileApp');
+
   return (
-    <html lang="en">
+    <html lang="en" className={isNativeApp ? 'is-native-app' : ''}>
       <body className={`${delaGothicOne.variable} ${spaceGrotesk.variable}`}>
         <SessionWrapper>
           <CartProvider>
