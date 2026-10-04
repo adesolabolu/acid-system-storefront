@@ -8,7 +8,7 @@ import { Navbar } from './Navbar';
 import { Footer } from './Footer';
 import { CartDrawer } from './CartDrawer';
 import { ProductVisual } from './ProductVisual';
-import { ArrowRight, Check, Plus, Search, SlidersHorizontal } from 'lucide-react';
+import { ArrowRight, Check, Plus, Search, SlidersHorizontal, ChevronDown } from 'lucide-react';
 import { GlitchText } from './GlitchText';
 
 interface ShopClientProps {
@@ -125,8 +125,8 @@ export default function ShopClient({ products }: ShopClientProps) {
               </button>
             </div>
 
-            {/* Categories */}
-            <div className="flex items-center gap-2 w-full lg:w-auto pb-2 lg:pb-0 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            {/* Categories (Hidden on Native) */}
+            <div className="flex items-center gap-2 w-full lg:w-auto pb-2 lg:pb-0 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] native-hide">
               {categories.map((cat) => (
                 <button
                   key={cat}
@@ -143,8 +143,8 @@ export default function ShopClient({ products }: ShopClientProps) {
             </div>
           </div>
           
-          {/* Sizes */}
-          <div className="flex items-center gap-2 pb-1 w-full overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+          {/* Sizes (Hidden on Native) */}
+          <div className="flex items-center gap-2 pb-1 w-full overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] native-hide">
             <span className="font-mono-code text-[10px] font-bold text-[#09090B]/60 mr-2 shrink-0">SIZE:</span>
             {sizes.map((s) => (
               <button
@@ -159,6 +159,34 @@ export default function ShopClient({ products }: ShopClientProps) {
                 {s}
               </button>
             ))}
+          </div>
+
+          {/* Native App Dropdowns (Only visible on Native) */}
+          <div className="native-only-flex w-full gap-3 mt-1">
+            <div className="relative flex-1">
+              <select 
+                value={selectedCategory} 
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="w-full appearance-none px-4 py-2.5 bg-white border-2 border-[#09090B] rounded-[8px] font-mono-code text-xs font-bold uppercase focus:outline-none focus:ring-2 focus:ring-[#D2E823] shadow-hard-sm"
+              >
+                {categories.map(c => <option key={c} value={c}>{c === 'ALL' ? 'ALL CATEGORIES' : c}</option>)}
+              </select>
+              <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                <ChevronDown className="w-4 h-4 text-[#09090B]" />
+              </div>
+            </div>
+            <div className="relative flex-1">
+              <select 
+                value={selectedSize} 
+                onChange={(e) => setSelectedSize(e.target.value)}
+                className="w-full appearance-none px-4 py-2.5 bg-white border-2 border-[#09090B] rounded-[8px] font-mono-code text-xs font-bold uppercase focus:outline-none focus:ring-2 focus:ring-[#D2E823] shadow-hard-sm"
+              >
+                {sizes.map(s => <option key={s} value={s}>{s === 'ALL' ? 'ALL SIZES' : s}</option>)}
+              </select>
+              <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                <ChevronDown className="w-4 h-4 text-[#09090B]" />
+              </div>
+            </div>
           </div>
         </div>
 

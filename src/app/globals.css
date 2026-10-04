@@ -223,3 +223,14 @@ html.is-native-app .native-hero-cta .btn-hard {
 html.is-native-app .native-hero-right {
   width: 100% !important;
 }
+
+/* Show elements only in native app */
+.native-only, .native-only-flex {
+  display: none !important;
+}
+html.is-native-app .native-only {
+  display: block !important;
+}
+html.is-native-app .native-only-flex {
+  display: flex !important;
+}
