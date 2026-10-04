@@ -18,6 +18,7 @@ interface AuthContextData {
   token: string | null;
   isLoading: boolean;
   login: () => void;
+  devLogin: () => Promise<void>; // Added devLogin
   logout: () => Promise<void>;
 }
 
@@ -87,6 +88,32 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  // ONE-CLICK DUMMY LOGIN
+  const devLogin = async () => {
+    try {
+      setIsLoading(true);
+      const backendRes = await fetchWithAuth('/api/auth/mobile-login', {
+        method: 'POST',
+        body: JSON.stringify({
+          email: 'sandbox@acidsys.com',
+          name: 'Sandbox Agent',
+          image: 'https://api.dicebear.com/7.x/bottts/png?seed=sandbox',
+        }),
+      });
+
+      const data = await backendRes.json();
+      if (data.success) {
+        await SecureStore.setItemAsync('session_token', data.token);
+        setToken(data.token);
+        setUser(data.user);
+      }
+    } catch (err) {
+      console.error('Dev Login error:', err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const login = () => {
     promptAsync();
   };
@@ -98,7 +125,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, isLoading, login, logout }}>
+    <AuthContext.Provider value={{ user, token, isLoading, login, devLogin, logout }}>
       {children}
     </AuthContext.Provider>
   );

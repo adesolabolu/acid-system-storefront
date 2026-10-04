@@ -1,5 +1,6 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 import { sql } from "@/lib/db";
 import { sendWelcomeEmail } from "@/lib/brevo";
@@ -14,6 +15,16 @@ export const authOptions: NextAuthOptions = {
           prompt: "select_account",
         },
       },
+    }),
+    CredentialsProvider({
+      name: "Sandbox Dummy",
+      credentials: {},
+      async authorize() {
+        const email = "sandbox@acidsys.com";
+        const name = "Sandbox Agent";
+        const image = "https://api.dicebear.com/7.x/bottts/png?seed=sandbox";
+        return { id: "9999", email, name, image };
+      }
     }),
   ],
   session: { strategy: "jwt" },
