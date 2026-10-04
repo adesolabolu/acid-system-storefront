@@ -262,7 +262,7 @@ export default function ShopClient({ products }: ShopClientProps) {
                     <span className="block font-mono-code text-[10px] text-[#09090B]/60 font-bold uppercase">
                       PRICE
                     </span>
-                    <span className="font-mono-code text-lg font-bold text-[#09090B] tabular-nums">
+                    <span className="font-mono-code text-sm lg:text-lg font-bold text-[#09090B] tabular-nums">
                       ₦{product.price.toLocaleString()}
                     </span>
                   </div>
@@ -277,7 +277,7 @@ export default function ShopClient({ products }: ShopClientProps) {
                   ) : (
                     <button
                       onClick={() => handleAddToCart(product, selectedSizes[product.id] || product.variants?.[0]?.size_label || 'ONE SIZE')}
-                      className={`inline-flex items-center gap-1.5 px-4 py-2 border-2 border-[#09090B] rounded-[8px] font-mono-code text-xs font-bold uppercase transition-all shadow-hard-sm ${
+                      className={`inline-flex items-center justify-center gap-1.5 px-3 md:px-4 py-2 border-2 border-[#09090B] rounded-[8px] font-mono-code text-[10px] md:text-xs font-bold uppercase transition-all shadow-hard-sm ${
                         addedProductId === product.id
                           ? 'bg-[#D2E823] text-[#09090B] translate-x-[2px] translate-y-[2px] shadow-none'
                           : 'bg-[#09090B] text-[#D2E823] hover:bg-[#D2E823] hover:text-[#09090B] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none active:translate-y-[4px]'
@@ -286,12 +286,14 @@ export default function ShopClient({ products }: ShopClientProps) {
                       {addedProductId === product.id ? (
                         <>
                           <Check className="w-3.5 h-3.5" />
-                          <span>ADDED</span>
+                          <span className="hidden lg:inline">ADDED</span>
+                          <span className="lg:hidden">ADDED</span>
                         </>
                       ) : (
                         <>
                           <Plus className="w-3.5 h-3.5" />
-                          <span>ADD TO ALLOCATION</span>
+                          <span className="hidden lg:inline">ADD TO ALLOCATION</span>
+                          <span className="lg:hidden">ADD</span>
                         </>
                       )}
                     </button>
