@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { GlitchText } from '@/components/GlitchText';
 import { ArrowLeft } from 'lucide-react';
 import { LogoutButton } from '@/components/LogoutButton';
+import { BottomTabBar } from '@/components/BottomTabBar';
 
 export const revalidate = 0;
 
@@ -161,6 +162,7 @@ export default async function DashboardPage() {
           )}
         </div>
       </div>
+      <BottomTabBar />
     </div>
   );
 }

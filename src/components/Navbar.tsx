@@ -1,11 +1,13 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { ShoppingBag, Sliders, Zap, Loader2, User, Menu } from 'lucide-react';
+import { ShoppingBag, Sliders, Zap, Loader2, User, Menu, Home, Grid } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
 import { GlitchText } from './GlitchText';
 import { useSession, signOut } from "next-auth/react";
 import { motion, AnimatePresence } from 'framer-motion';
 import { AuthModal } from './AuthModal';
+import { BottomTabBar } from './BottomTabBar';
 
 interface NavbarProps {
   cartCount: number;
@@ -18,9 +20,19 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenCart,
 }) => {
   const { data: session, status } = useSession();
+  const pathname = usePathname();
+  const router = useRouter();
   const [showWelcomeToast, setShowWelcomeToast] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const handleAccountClick = () => {
+    if (status === 'authenticated') {
+      router.push('/dashboard');
+    } else {
+      setShowAuthModal(true);
+    }
+  };
 
   useEffect(() => {
     if (status === 'authenticated') {
@@ -63,7 +75,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         </Link>
 
         {/* Zone 2: Navigation links */}
-        <nav className="hidden lg:flex items-center gap-8 text-xs uppercase tracking-wider font-bold text-[#09090B]">
+        <nav className="hidden lg:flex items-center gap-8 text-xs uppercase tracking-wider font-bold text-[#09090B] native-hide">
           <Link
             href="/shop"
             className="hover:text-[#09090B] hover:underline underline-offset-4 decoration-2 decoration-[#09090B] transition-all"
@@ -88,20 +100,20 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="flex items-center gap-2 md:gap-3">
           {/* Desktop Auth */}
           {status === "loading" ? (
-            <div className="hidden md:flex items-center justify-center border-2 border-[#09090b] bg-[#D2E823] text-[#09090b] px-3 py-2 shadow-hard-sm">
+            <div className="hidden md:flex items-center justify-center border-2 border-[#09090b] bg-[#D2E823] text-[#09090b] px-3 py-2 shadow-hard-sm native-hide">
               <Loader2 className="w-4 h-4 animate-spin" />
             </div>
           ) : status === "unauthenticated" ? (
-            <button onClick={() => setShowAuthModal(true)} className="hidden md:inline-block border-2 border-[#09090b] bg-[#D2E823] text-[#09090b] font-mono-code text-[11px] uppercase px-3 py-2 font-bold shadow-[2px_2px_0px_#09090b] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">LOGIN</button>
+            <button onClick={() => setShowAuthModal(true)} className="hidden md:inline-block border-2 border-[#09090b] bg-[#D2E823] text-[#09090b] font-mono-code text-[11px] uppercase px-3 py-2 font-bold shadow-[2px_2px_0px_#09090b] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all native-hide">LOGIN</button>
           ) : status === "authenticated" ? (
-            <Link href="/dashboard" className="hidden md:flex items-center gap-2 border-2 border-[#09090b] bg-[#F8F4E8] px-2.5 py-1.5 shadow-hard-sm text-xs font-mono-code hover:translate-y-[2px] hover:shadow-none transition-all group">
+            <Link href="/dashboard" className="hidden md:flex items-center gap-2 border-2 border-[#09090b] bg-[#F8F4E8] px-2.5 py-1.5 shadow-hard-sm text-xs font-mono-code hover:translate-y-[2px] hover:shadow-none transition-all group native-hide">
               <User className="w-3.5 h-3.5 text-[#09090b]" />
               <span className="text-[#09090b] font-bold uppercase group-hover:underline underline-offset-2">OP // {session.user?.name?.split(" ")[0] || "AUTH"}</span>
             </Link>
           ) : null}
 
           {/* Mobile Auth Icon */}
-          <div className="md:hidden">
+          <div className="md:hidden native-hide">
             {status === "loading" ? (
               <div className="p-2 border-2 border-[#09090b] bg-[#D2E823] text-[#09090b] rounded-[8px] shadow-hard-sm flex items-center justify-center">
                 <Loader2 className="w-4 h-4 animate-spin" />
@@ -136,7 +148,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Mobile Hamburger Menu */}
           <button 
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className={`lg:hidden flex items-center justify-center p-2 border-2 border-[#09090B] rounded-[8px] transition-all ${isMobileMenuOpen ? 'bg-[#09090B] text-[#D2E823] shadow-none translate-y-[2px]' : 'bg-white text-[#09090B] shadow-hard-sm hover:bg-[#D2E823] hover:translate-y-[2px] hover:shadow-none'}`}
+            className={`lg:hidden flex items-center justify-center p-2 border-2 border-[#09090B] rounded-[8px] transition-all native-hide ${isMobileMenuOpen ? 'bg-[#09090B] text-[#D2E823] shadow-none translate-y-[2px]' : 'bg-white text-[#09090B] shadow-hard-sm hover:bg-[#D2E823] hover:translate-y-[2px] hover:shadow-none'}`}
             aria-label="Menu"
           >
             <Menu className="w-4 h-4" />
@@ -181,6 +193,12 @@ export const Navbar: React.FC<NavbarProps> = ({
         </AnimatePresence>
       </div>
     </header>
+
+    {/* Native App Bottom Tab Bar */}
+    <BottomTabBar onOpenAuth={() => {
+      setIsMobileMenuOpen(false);
+      setShowAuthModal(true);
+    }} />
 
     {showWelcomeToast && (
       <div className="fixed top-24 left-1/2 -translate-x-1/2 z-50 p-4 bg-[#09090B] text-[#D2E823] font-mono-code text-xs font-bold uppercase border-2 border-[#D2E823] rounded-[10px] shadow-hard-lg animate-in slide-in-from-top-4 fade-in duration-300 flex items-center gap-3">

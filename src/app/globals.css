@@ -176,3 +176,18 @@ html.is-native-app a[href="/#manifesto"],
 html.is-native-app a[href="/#dispatch-standard"] {
   display: none !important;
 }
+
+/* Hide standard navbar elements in native app */
+html.is-native-app .native-hide {
+  display: none !important;
+}
+
+/* Show native bottom tab bar only in native app */
+html.is-native-app .native-bottom-bar {
+  display: grid !important;
+}
+
+/* Ensure body has padding at the bottom so content isn't hidden behind the tab bar */
+html.is-native-app body {
+  padding-bottom: 4rem; /* 16px * 4 = 64px (h-16) */
+}
