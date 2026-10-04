@@ -16,7 +16,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   return (
     <section id="hero" className="max-w-7xl mx-auto px-4 md:px-8 pt-4 pb-16">
       {/* Top sticker bar */}
-      <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-8 native-hide">
         {/* Sticker badge: pill-shaped, rotated -2 degrees, #D2E823 background, 2px border */}
         <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#D2E823] text-[#09090B] font-display text-xs md:text-sm tracking-wider uppercase border-2 border-[#09090B] rounded-full shadow-hard-sm -rotate-2 select-none hover:rotate-0 transition-transform">
           <Sparkles className="w-3.5 h-3.5 fill-[#09090B]" />
@@ -34,10 +34,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       </div>
 
       {/* 12-Column Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center native-hero-grid">
         {/* Left Side: 7 Columns */}
-        <div className="lg:col-span-7 flex flex-col justify-center">
-          <div className="space-y-1 mb-6 max-w-full">
+        <div className="lg:col-span-7 flex flex-col justify-center native-hero-left">
+          <div className="space-y-1 mb-6 max-w-full native-hide">
             <div>
               <GlitchText
                 text="ENGINEERED"
@@ -57,16 +57,16 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </div>
           </div>
 
-          <p className="text-base sm:text-lg text-[#09090B]/90 font-medium max-w-xl mb-8 leading-relaxed">
+          <p className="text-base sm:text-lg text-[#09090B]/90 font-medium max-w-xl mb-8 leading-relaxed native-hide">
             Heavyweight gabardine, unyielding 500GSM fleece, and zero-compromise structural drape. Designed for high tactile presence.
           </p>
 
           {/* Action CTAs */}
-          <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6 native-hero-cta">
             {/* Primary Hard-Shadow Button */}
             <a
               href="/shop"
-              className="btn-hard text-sm sm:text-base group inline-flex items-center"
+              className="btn-hard text-sm sm:text-base group inline-flex items-center w-full sm:w-auto"
               data-cursor="pointer"
             >
               <span className="flex items-center gap-2">
@@ -78,7 +78,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             {/* Secondary Call-to-action Button: 20px padding, 2px border, 8px shadow */}
             <a
               href="#manifesto"
-              className="px-5 py-5 sm:px-6 sm:py-5 text-sm sm:text-base font-bold bg-[#F8F4E8] text-[#09090B] border-2 border-[#09090B] rounded-[12px] shadow-hard-lg hover:bg-[#D2E823] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-hard transition-all active:translate-y-[4px] active:shadow-none inline-flex items-center gap-2"
+              className="px-5 py-5 sm:px-6 sm:py-5 text-sm sm:text-base font-bold bg-[#F8F4E8] text-[#09090B] border-2 border-[#09090B] rounded-[12px] shadow-hard-lg hover:bg-[#D2E823] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-hard transition-all active:translate-y-[4px] active:shadow-none inline-flex items-center gap-2 native-hide"
               data-cursor="pointer"
             >
               <Compass className="w-4 h-4" />
@@ -87,7 +87,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </div>
 
           {/* Quick Technical Specs Bar */}
-          <div className="grid grid-cols-3 gap-3 mt-10 pt-6 border-t-2 border-[#09090B]">
+          <div className="grid grid-cols-3 gap-3 mt-10 pt-6 border-t-2 border-[#09090B] native-hide">
             <div>
               <span className="block font-mono-code text-[11px] text-[#09090B]/60 font-semibold uppercase">SHELL FABRIC</span>
               <span className="font-display text-sm sm:text-base text-[#09090B]">500D CORDURA</span>
@@ -104,7 +104,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         </div>
 
         {/* Right Side: 5 Columns with Primary Image Card + Floating Asset Card */}
-        <div className="lg:col-span-5 relative">
+        <div className="lg:col-span-5 relative native-hero-right">
           {/* Main Hero Card: 32px border radius, #09090B border */}
           <div className="relative w-full aspect-[4/3] sm:aspect-square rounded-[32px] border-2 border-[#09090B] overflow-hidden shadow-hard-xl bg-[#09090B]">
             {/* Primary Visual artwork */}
@@ -123,7 +123,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </div>
 
           {/* Telemetry Asset Card: flows below image on mobile (relative mt-5), floats on desktop (sm:absolute sm:-bottom-8 sm:-left-8) */}
-          <div className="hidden sm:block relative mt-5 w-full sm:w-72 sm:absolute sm:mt-0 sm:-bottom-8 sm:-left-8 z-20 p-4 bg-[#F8F4E8] border-2 border-[#09090B] rounded-[16px] shadow-hard-lg sm:animate-float">
+          <div className="hidden sm:block relative mt-5 w-full sm:w-72 sm:absolute sm:mt-0 sm:-bottom-8 sm:-left-8 z-20 p-4 bg-[#F8F4E8] border-2 border-[#09090B] rounded-[16px] shadow-hard-lg sm:animate-float native-hide">
             <div className="flex items-start justify-between mb-2">
               <span className="inline-block px-2 py-0.5 bg-[#09090B] text-[#D2E823] text-[10px] font-mono-code font-bold uppercase rounded-[4px]">
                 LIVE TELEMETRY

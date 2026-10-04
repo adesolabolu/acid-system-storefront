@@ -191,3 +191,35 @@ html.is-native-app .native-bottom-bar {
 html.is-native-app body {
   padding-bottom: 4rem; /* 16px * 4 = 64px (h-16) */
 }
+
+/* =========================================================================
+   HERO SECTION OVERRIDES FOR NATIVE APP
+   ========================================================================= */
+html.is-native-app .native-hero-grid {
+  display: flex !important;
+  flex-direction: column-reverse !important; /* Forces the image card to the top, CTA to the bottom */
+  gap: 1.5rem !important;
+}
+
+html.is-native-app .native-hero-left {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  margin-top: 0 !important;
+}
+
+html.is-native-app .native-hero-cta {
+  width: 100% !important;
+  justify-content: center !important;
+}
+
+html.is-native-app .native-hero-cta .btn-hard {
+  width: 100% !important;
+  font-size: 1.125rem !important;
+  padding-top: 1.25rem !important;
+  padding-bottom: 1.25rem !important;
+}
+
+html.is-native-app .native-hero-right {
+  width: 100% !important;
+}
