@@ -41,7 +41,6 @@ export async function sendOrderReceipt(order: any) {
       body: JSON.stringify({
         sender: { name: senderName, email: senderEmail },
         to: [{ email: order.customerEmail, name: order.customerName }],
-        bcc: [{ email: senderEmail, name: "ACID//SYS ADMIN" }],
         subject: `ACID//SYS: ORDER [${order.id}] CONFIRMED`,
         htmlContent,
       }),
@@ -56,6 +55,76 @@ export async function sendOrderReceipt(order: any) {
     return data.messageId;
   } catch (err) {
     console.error('Error sending receipt:', err);
+    return null;
+  }
+}
+
+export async function sendOrderReceiptAdmin(order: any) {
+  const apiKey = process.env.BREVO_API_KEY;
+  const senderEmail = process.env.BREVO_SENDER_EMAIL || 'receipts@acidsys.com';
+  const senderName = process.env.BREVO_SENDER_NAME || 'ACID//SYS ADMIN';
+
+  if (!apiKey) {
+    return null;
+  }
+
+  const total = new Intl.NumberFormat('en-NG', { style: 'currency', currency: 'NGN' }).format(order.totalAmount);
+  
+  const address = order.shippingAddress || {};
+
+  const htmlContent = `
+    <div style="background-color: #121316; color: #D2E823; font-family: monospace; padding: 40px; border: 2px solid #D2E823;">
+      <h1 style="text-transform: uppercase; letter-spacing: -1px; border-bottom: 2px solid #D2E823; padding-bottom: 20px;">/// NEW ORDER RECEIVED</h1>
+      <p style="color: #F8F4E8;">ORDER ID: ${order.id}</p>
+      <p style="color: #F8F4E8;">CUSTOMER: ${order.customerName}</p>
+      <p style="color: #F8F4E8;">EMAIL: ${order.customerEmail}</p>
+      <p style="color: #F8F4E8;">PHONE: ${address.phone || 'N/A'}</p>
+      
+      <h3 style="color: #D2E823; margin-top: 30px;">[ SHIPPING / FULFILLMENT DETAILS ]</h3>
+      <p style="color: #F8F4E8; margin: 5px 0;">METHOD: ${address.deliveryMethod?.toUpperCase() || 'N/A'}</p>
+      <p style="color: #F8F4E8; margin: 5px 0;">PAYMENT: ${address.paymentMethod?.toUpperCase() || 'N/A'}</p>
+      <p style="color: #F8F4E8; margin: 5px 0;">STREET: ${address.street || 'N/A'}</p>
+      <p style="color: #F8F4E8; margin: 5px 0;">CITY/STATE: ${address.city || 'N/A'}, ${address.state || 'N/A'}</p>
+      <p style="color: #F8F4E8; margin: 5px 0;">COUNTRY: ${address.country || 'N/A'}</p>
+      
+      <h3 style="color: #D2E823; margin-top: 30px;">[ ORDER ITEMS ]</h3>
+      <table style="width: 100%; border-collapse: collapse; color: #F8F4E8; margin-bottom: 30px;">
+        ${order.items.map((item: any) => `
+          <tr>
+            <td style="padding: 10px; border-bottom: 1px solid #333;">${item.quantity}x ${item.product_name}</td>
+            <td style="padding: 10px; border-bottom: 1px solid #333;">SIZE: ${item.size_label}</td>
+          </tr>
+        `).join('')}
+      </table>
+      
+      <h2 style="color: #D2E823;">TOTAL YIELD: ${total}</h2>
+    </div>
+  `;
+
+  try {
+    const res = await fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: {
+        'api-key': apiKey,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        sender: { name: 'ACID//SYS SYSTEM', email: senderEmail },
+        to: [{ email: senderEmail, name: "ACID//SYS ADMIN" }],
+        subject: `[ADMIN] NEW ORDER [${order.id}] - ${order.customerName}`,
+        htmlContent,
+      }),
+    });
+    
+    if (!res.ok) {
+      console.error('Brevo API Error (Admin):', await res.text());
+      return null;
+    }
+    
+    const data = await res.json();
+    return data.messageId;
+  } catch (err) {
+    console.error('Error sending admin receipt:', err);
     return null;
   }
 }

@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "ACID//SYS",
+    "slug": "acid-sys",
+    "scheme": "acidsys",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "backgroundColor": "#F8F4E8",
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.acidsys.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#F8F4E8",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}

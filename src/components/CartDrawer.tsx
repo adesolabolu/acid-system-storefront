@@ -27,7 +27,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [orderConfirmed, setOrderConfirmed] = useState(false);
   const [showCheckoutForm, setShowCheckoutForm] = useState(false);
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '', address: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', street: '', city: '', state: '', country: '', deliveryMethod: 'delivery', paymentMethod: 'pod' });
   const [createdOrderId, setCreatedOrderId] = useState<string | null>(null);
   const { data: session } = useSession();
 
@@ -58,7 +58,15 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
         body: JSON.stringify({
           customerName: formData.name,
           customerEmail: formData.email,
-          shippingAddress: { phone: formData.phone, address: formData.address },
+          shippingAddress: { 
+            phone: formData.phone, 
+            street: formData.street, 
+            city: formData.city, 
+            state: formData.state, 
+            country: formData.country,
+            deliveryMethod: formData.deliveryMethod,
+            paymentMethod: formData.paymentMethod
+          },
           items: items.map(i => ({
             product_id: i.product.id,
             variant_id: i.product.variants?.find((v: any) => v.size_label === i.size)?.id || null,
@@ -292,11 +300,28 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
             </div>
 
             {showCheckoutForm ? (
-              <form onSubmit={handleCheckoutSubmit} className="space-y-3 pt-2 border-t border-[#09090B]/20">
+              <form onSubmit={handleCheckoutSubmit} className="space-y-3 pt-2 border-t border-[#09090B]/20 max-h-[50vh] overflow-y-auto pr-2">
                 <input required type="text" placeholder="FULL NAME" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="w-full bg-[#F8F4E8] border border-[#09090B] px-3 py-2 text-xs font-mono-code placeholder:text-[#09090B]/40 focus:outline-none focus:border-[#D2E823] focus:ring-1 focus:ring-[#D2E823]" />
                 <input required type="email" placeholder="EMAIL ADDRESS" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full bg-[#F8F4E8] border border-[#09090B] px-3 py-2 text-xs font-mono-code placeholder:text-[#09090B]/40 focus:outline-none focus:border-[#D2E823] focus:ring-1 focus:ring-[#D2E823]" />
                 <input required type="tel" placeholder="PHONE NUMBER" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="w-full bg-[#F8F4E8] border border-[#09090B] px-3 py-2 text-xs font-mono-code placeholder:text-[#09090B]/40 focus:outline-none focus:border-[#D2E823] focus:ring-1 focus:ring-[#D2E823]" />
-                <textarea required placeholder="DELIVERY ADDRESS" value={formData.address} onChange={e => setFormData({...formData, address: e.target.value})} className="w-full bg-[#F8F4E8] border border-[#09090B] px-3 py-2 text-xs font-mono-code placeholder:text-[#09090B]/40 focus:outline-none focus:border-[#D2E823] focus:ring-1 focus:ring-[#D2E823] min-h-[60px]" />
+                
+                <input required type="text" placeholder="STREET ADDRESS" value={formData.street} onChange={e => setFormData({...formData, street: e.target.value})} className="w-full bg-[#F8F4E8] border border-[#09090B] px-3 py-2 text-xs font-mono-code placeholder:text-[#09090B]/40 focus:outline-none focus:border-[#D2E823] focus:ring-1 focus:ring-[#D2E823]" />
+                <div className="flex gap-2">
+                  <input required type="text" placeholder="CITY" value={formData.city} onChange={e => setFormData({...formData, city: e.target.value})} className="w-1/2 bg-[#F8F4E8] border border-[#09090B] px-3 py-2 text-xs font-mono-code placeholder:text-[#09090B]/40 focus:outline-none focus:border-[#D2E823] focus:ring-1 focus:ring-[#D2E823]" />
+                  <input required type="text" placeholder="STATE" value={formData.state} onChange={e => setFormData({...formData, state: e.target.value})} className="w-1/2 bg-[#F8F4E8] border border-[#09090B] px-3 py-2 text-xs font-mono-code placeholder:text-[#09090B]/40 focus:outline-none focus:border-[#D2E823] focus:ring-1 focus:ring-[#D2E823]" />
+                </div>
+                <input required type="text" placeholder="COUNTRY" value={formData.country} onChange={e => setFormData({...formData, country: e.target.value})} className="w-full bg-[#F8F4E8] border border-[#09090B] px-3 py-2 text-xs font-mono-code placeholder:text-[#09090B]/40 focus:outline-none focus:border-[#D2E823] focus:ring-1 focus:ring-[#D2E823]" />
+                
+                <div className="flex gap-2">
+                  <select required value={formData.deliveryMethod} onChange={e => setFormData({...formData, deliveryMethod: e.target.value})} className="w-1/2 bg-[#F8F4E8] border border-[#09090B] px-3 py-2 text-xs font-mono-code focus:outline-none focus:border-[#D2E823] focus:ring-1 focus:ring-[#D2E823] cursor-pointer">
+                    <option value="delivery">DELIVERY</option>
+                    <option value="pickup">PICKUP</option>
+                  </select>
+                  <select required value={formData.paymentMethod} onChange={e => setFormData({...formData, paymentMethod: e.target.value})} className="w-1/2 bg-[#F8F4E8] border border-[#09090B] px-3 py-2 text-xs font-mono-code focus:outline-none focus:border-[#D2E823] focus:ring-1 focus:ring-[#D2E823] cursor-pointer">
+                    <option value="pod">PAY ON DELIVERY</option>
+                    <option value="card">CARD PAYMENT</option>
+                  </select>
+                </div>
                 
                 <button
                   type="submit"

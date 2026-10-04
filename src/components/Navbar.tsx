@@ -185,7 +185,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     {showWelcomeToast && (
       <div className="fixed top-24 left-1/2 -translate-x-1/2 z-50 p-4 bg-[#09090B] text-[#D2E823] font-mono-code text-xs font-bold uppercase border-2 border-[#D2E823] rounded-[10px] shadow-hard-lg animate-in slide-in-from-top-4 fade-in duration-300 flex items-center gap-3">
         <span className="w-2.5 h-2.5 bg-[#D2E823] animate-pulse" />
-        <span>WELCOME BACK, {session?.user?.name?.split(" ")[0] || "OPERATOR"} // SYSTEM SYNCED</span>
+        <span>WELCOME, {session?.user?.name?.split(" ")[0] || "OPERATOR"} // SYSTEM SYNCED</span>
       </div>
     )}
 

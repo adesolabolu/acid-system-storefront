@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { sql } from '@/lib/db';
-import { sendOrderReceipt } from '@/lib/brevo';
+import { sendOrderReceipt, sendOrderReceiptAdmin } from '@/lib/brevo';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../auth/[...nextauth]/route';
 
@@ -39,8 +39,9 @@ export async function POST(req: Request) {
     }
 
     // Send receipt
-    const order = { id: orderId, customerName, customerEmail, items, totalAmount };
+    const order = { id: orderId, customerName, customerEmail, shippingAddress, items, totalAmount };
     const messageId = await sendOrderReceipt(order);
+    await sendOrderReceiptAdmin(order);
 
     if (messageId) {
       await sql`UPDATE orders SET brevo_message_id = ${messageId} WHERE id = ${orderId}`;
