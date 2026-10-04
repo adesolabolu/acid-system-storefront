@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
 import { CartItem, Product } from '@/types';
 
@@ -17,94 +17,133 @@ const CartContext = createContext<CartContextProps | undefined>(undefined);
 
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
-  const { data: session, status } = useSession();
-  const [hasFetchedDbCart, setHasFetchedDbCart] = useState(false);
+  const { status } = useSession();
+
+  const fetchCart = useCallback(async () => {
+    if (status !== 'authenticated') return;
+    try {
+      const res = await fetch('/api/cart');
+      const data = await res.json();
+      if (data.cart) {
+        const mapped: CartItem[] = data.cart.map((item: any) => ({
+          product: {
+            id: item.product_sku,
+            sku_code: item.product_sku,
+            name: item.product_name,
+            price: Number(item.base_price),
+            base_price: Number(item.base_price),
+            visualType: item.cad_type,
+            cad_type: item.cad_type,
+            description: '',
+            category: '',
+            isSoldOut: false,
+            edition: 'STANDARD',
+            tag: '',
+            variants: [],
+            in_stock: true,
+          } as Product,
+          quantity: item.quantity,
+          size: item.size
+        }));
+        setCart(mapped);
+        localStorage.setItem('acidsys_cart', JSON.stringify(mapped));
+      }
+    } catch (e) {
+      console.error('Failed to fetch DB cart:', e);
+    }
+  }, [status]);
 
   // Initial local storage load
   useEffect(() => {
     const saved = localStorage.getItem('acidsys_cart');
     if (saved) {
-      try {
-        setCart(JSON.parse(saved));
-      } catch (e) {}
+      try { setCart(JSON.parse(saved)); } catch (e) {}
     }
   }, []);
 
-  // Fetch from DB when authenticated
+  // DB Sync & SSE integration
   useEffect(() => {
-    if (status === 'authenticated' && !hasFetchedDbCart) {
-      fetch('/api/cart')
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.cart && Array.isArray(data.cart)) {
-            setCart((prev) => {
-              const merged = [...data.cart];
-              for (const item of prev) {
-                const existing = merged.find(
-                  (m) => m.product.id === item.product.id && m.size === item.size
-                );
-                if (existing) {
-                  existing.quantity = Math.max(existing.quantity, item.quantity);
-                } else {
-                  merged.push(item);
-                }
-              }
-              return merged;
-            });
-          }
-          setHasFetchedDbCart(true);
-        })
-        .catch(console.error);
+    if (status === 'authenticated') {
+      fetchCart();
+      const evtSource = new EventSource('/api/cart/stream');
+      evtSource.addEventListener('cart_update', () => {
+         fetchCart();
+      });
+      return () => {
+        evtSource.close();
+      };
     } else if (status === 'unauthenticated') {
-      setHasFetchedDbCart(false);
+      setCart([]);
+      localStorage.removeItem('acidsys_cart');
     }
-  }, [status, hasFetchedDbCart]);
+  }, [status, fetchCart]);
 
-  // Sync to local storage & DB
-  useEffect(() => {
-    localStorage.setItem('acidsys_cart', JSON.stringify(cart));
-    if (status === 'authenticated' && hasFetchedDbCart) {
-      fetch('/api/cart', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ cart }),
-      }).catch(console.error);
-    }
-  }, [cart, status, hasFetchedDbCart]);
-
-  const addToCart = (product: Product, size: string) => {
+  const addToCart = async (product: Product, size: string) => {
+    // Optimistic UI update
     setCart((prev) => {
-      const existingIndex = prev.findIndex(
-        (item) => item.product.id === product.id && item.size === size
-      );
-      if (existingIndex > -1) {
+      const idx = prev.findIndex(i => (i.product.sku_code || i.product.id) === (product.sku_code || product.id) && i.size === size);
+      if (idx > -1) {
         const next = [...prev];
-        next[existingIndex].quantity += 1;
+        next[idx].quantity += 1;
         return next;
       }
       return [...prev, { product, quantity: 1, size }];
     });
+
+    if (status === 'authenticated') {
+      const sku = product.sku_code || String(product.id);
+      await fetch('/api/cart', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ product_sku: sku, quantity: 1, size })
+      });
+    }
   };
 
-  const updateQuantity = (productId: string | number, size: string, delta: number) => {
-    setCart((prev) => {
-      return prev
-        .map((item) => {
-          if (item.product.id === productId && item.size === size) {
-            const nextQty = item.quantity + delta;
-            return nextQty > 0 ? { ...item, quantity: nextQty } : null;
-          }
-          return item;
-        })
-        .filter((item): item is CartItem => item !== null);
-    });
+  const updateQuantity = async (productId: string | number, size: string, delta: number) => {
+    const item = cart.find(i => i.product.id === productId && i.size === size);
+    if (!item) return;
+    const sku = item.product.sku_code || String(item.product.id);
+    
+    if (item.quantity + delta <= 0) {
+      removeItem(productId, size);
+      return;
+    }
+
+    // Optimistic
+    setCart(prev => prev.map(i => 
+      i.product.id === productId && i.size === size ? { ...i, quantity: i.quantity + delta } : i
+    ));
+
+    if (status === 'authenticated') {
+      await fetch('/api/cart', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ product_sku: sku, quantity: delta, size })
+      });
+    }
   };
 
-  const removeItem = (productId: string | number, size: string) => {
-    setCart((prev) => prev.filter((item) => !(item.product.id === productId && item.size === size)));
+  const removeItem = async (productId: string | number, size: string) => {
+    const item = cart.find(i => i.product.id === productId && i.size === size);
+    if (!item) return;
+    const sku = item.product.sku_code || String(item.product.id);
+
+    // Optimistic
+    setCart(prev => prev.filter(i => !(i.product.id === productId && i.size === size)));
+
+    if (status === 'authenticated') {
+      await fetch('/api/cart', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ product_sku: sku, size })
+      });
+    }
   };
 
-  const clearCart = () => setCart([]);
+  const clearCart = () => {
+    setCart([]);
+  };
 
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
