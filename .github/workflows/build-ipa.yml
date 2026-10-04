@@ -30,9 +30,9 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
 
-      - name: Downgrade Swift Tools Version
+      - name: Patch Expo JSI Header
         run: |
-          find node_modules -type f -name "Package.swift" -exec sed -i '' 's/swift-tools-version: 6.2/swift-tools-version: 6.0/g' {} +
+          find node_modules -name "RuntimeScheduler.h" -exec sed -i '' 's/SWIFT_RETURNS_RETAINED RuntimeScheduler/RuntimeScheduler/g' {} +
 
       - name: Run Expo iOS Prebuild
         run: npx expo prebuild --platform ios --clean
