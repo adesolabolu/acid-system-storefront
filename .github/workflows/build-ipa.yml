@@ -55,7 +55,8 @@ jobs:
                 installer.pods_project.targets.each do |target|
                   target.build_configurations.each do |config|
                     config.build_settings["SWIFT_STRICT_CONCURRENCY"] = "minimal"
-                    config.build_settings["SWIFT_VERSION"] = "5.0"
+                    config.build_settings["SWIFT_VERSION"] = "5.9"
+                    config.build_settings["GCC_WARN_INHIBIT_ALL_WARNINGS"] = "YES"
                   end
                 end
               }
@@ -86,8 +87,9 @@ jobs:
             DEVELOPMENT_TEAM="" \
             PROVISIONING_PROFILE_SPECIFIER="" \
             SWIFT_STRICT_CONCURRENCY=minimal \
-            SWIFT_VERSION=5.0 \
-            build
+            SWIFT_VERSION=5.9 \
+            GCC_WARN_INHIBIT_ALL_WARNINGS=YES \
+            build 2>&1 | tee build.log
 
       - name: Package Payload into IPA
         run: |
