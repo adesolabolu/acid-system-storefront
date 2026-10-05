@@ -130,7 +130,7 @@ export default async function DashboardPage() {
                 NO ACTIVE DISPATCHES FOUND IN THE MAINFRAME.
               </p>
               <Link href="/shop" className="inline-block bg-[#09090B] text-[#D2E823] font-mono-code font-bold text-xs uppercase px-6 sm:px-8 py-4 border-2 border-[#09090B] shadow-hard hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
-                INITIATE ACQUISITION
+                EXPLORE SHOP
               </Link>
             </div>
           ) : (
