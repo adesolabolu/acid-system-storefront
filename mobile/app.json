@@ -8,9 +8,6 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "backgroundColor": "#F8F4E8",
-    "ios": {
-      "supportsTablet": true
-    },
     "android": {
       "package": "com.acidsys.app",
       "adaptiveIcon": {
