@@ -37,10 +37,28 @@ jobs:
       - name: Run Expo iOS Prebuild
         run: npx expo prebuild --platform ios --clean
 
-      - name: Bind Node.js Environment & Install CocoaPods
+      - name: Configure Podfile & CocoaPods
         run: |
           mkdir -p ios
           echo "export NODE_BINARY=$(which node)" > ios/.xcode.env.local
+          ruby -e '
+            file = "ios/Podfile"
+            if File.exist?(file)
+              content = File.read(file)
+              snippet = %Q{
+                installer.pods_project.targets.each do |target|
+                  target.build_configurations.each do |config|
+                    config.build_settings["SWIFT_STRICT_CONCURRENCY"] = "minimal"
+                    config.build_settings["SWIFT_VERSION"] = "5.0"
+                  end
+                end
+              }
+              if content.include?("post_install do |installer|")
+                content.sub!("post_install do |installer|", "post_install do |installer|\n" + snippet)
+                File.write(file, content)
+              end
+            end
+          '
           cd ios
           pod install --repo-update
           cd ..
@@ -61,6 +79,8 @@ jobs:
             AD_HOC_CODE_SIGNING_ALLOWED=YES \
             DEVELOPMENT_TEAM="" \
             PROVISIONING_PROFILE_SPECIFIER="" \
+            SWIFT_STRICT_CONCURRENCY=minimal \
+            SWIFT_VERSION=5.0 \
             build
 
       - name: Package Payload into IPA
