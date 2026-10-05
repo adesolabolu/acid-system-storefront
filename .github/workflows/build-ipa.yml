@@ -32,10 +32,6 @@ jobs:
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
 
-      - name: Downgrade Swift Tools Version
-        run: |
-          find node_modules -type f -name "Package.swift" -exec sed -i '' 's/swift-tools-version: 6.2/swift-tools-version: 6.0/g' {} +
-
       - name: Patch Expo JSI Header (if needed)
         run: |
           # Only patch if RuntimeScheduler.h exists and truly needs patching
@@ -60,33 +56,24 @@ jobs:
             file = "ios/Podfile"
             if File.exist?(file)
               content = File.read(file)
-              snippet = %Q{
-                installer.pods_project.targets.each do |target|
-                  # Skip ExpoModulesJSI to prevent build script conflicts
-                  next if target.name == "ExpoModulesJSI"
-                  
-                  target.build_configurations.each do |config|
-                    config.build_settings["SWIFT_STRICT_CONCURRENCY"] = "minimal"
-                    config.build_settings["SWIFT_VERSION"] = "5.9"
-                    config.build_settings["GCC_WARN_INHIBIT_ALL_WARNINGS"] = "YES"
-                  end
-                end
-                
-                # Handle ExpoModulesJSI separately with special configuration
-                jsi_target = installer.pods_project.targets.find { |t| t.name == "ExpoModulesJSI" }
-                if jsi_target
-                  jsi_target.build_configurations.each do |config|
-                    config.build_settings["SWIFT_STRICT_CONCURRENCY"] = "minimal"
-                    config.build_settings["SWIFT_VERSION"] = "5.9"
-                    config.build_settings["GCC_WARN_INHIBIT_ALL_WARNINGS"] = "YES"
-                    # Ensure proper JSI header handling
-                    config.build_settings["HEADER_SEARCH_PATHS"] = "$(inherited) $(PODS_ROOT)/Headers/Public/ReactCommon $(PODS_ROOT)/Headers/Public/React-jsi"
-                  end
-                end
-              }
+              
               if content.include?("post_install do |installer|")
+                snippet = %Q{
+                  # Configure all pods except ExpoModulesJSI
+                  installer.pods_project.targets.each do |target|
+                    next if target.name == "ExpoModulesJSI"
+                    
+                    target.build_configurations.each do |config|
+                      config.build_settings["SWIFT_STRICT_CONCURRENCY"] = "minimal"
+                      config.build_settings["SWIFT_VERSION"] = "5.9"
+                      config.build_settings["GCC_WARN_INHIBIT_ALL_WARNINGS"] = "YES"
+                    end
+                  end
+                }
+                
                 content.sub!("post_install do |installer|", "post_install do |installer|\n" + snippet)
                 File.write(file, content)
+                puts "✅ Updated Podfile with Swift configuration"
               end
             end
           '
@@ -102,6 +89,7 @@ jobs:
           # Disable exit-on-error so we can manually catch the pipe failure
           set +e
           
+          # Build without aggressive Swift/warning suppression that may cause ExpoModulesJSI issues
           xcodebuild -workspace ios/*.xcworkspace \
             -scheme "$SCHEME_NAME" \
             -configuration Release \
@@ -114,16 +102,19 @@ jobs:
             AD_HOC_CODE_SIGNING_ALLOWED=YES \
             DEVELOPMENT_TEAM="" \
             PROVISIONING_PROFILE_SPECIFIER="" \
-            SWIFT_STRICT_CONCURRENCY=minimal \
-            SWIFT_VERSION=5.9 \
-            GCC_WARN_INHIBIT_ALL_WARNINGS=YES \
             build 2>&1 | tee build.log
           
           BUILD_EXIT=${PIPESTATUS[0]}
           
           # Validate the build actually succeeded
           if [ $BUILD_EXIT -ne 0 ]; then
-            echo "❌ Build failed! Check build.log for details."
+            echo ""
+            echo "❌ Build failed with exit code $BUILD_EXIT"
+            echo ""
+            echo "=== Searching for ExpoModulesJSI script errors ==="
+            grep -A 20 "ExpoModulesJSI" build.log | head -40 || echo "No ExpoModulesJSI details found"
+            echo ""
+            echo "=== Last 100 lines of build output ==="
             tail -n 100 build.log
             exit 1
           fi
