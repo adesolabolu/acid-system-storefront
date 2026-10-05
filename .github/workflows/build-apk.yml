@@ -1,0 +1,44 @@
+name: Build Android APK (Fast)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-android:
+    name: Compile Android APK
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./mobile
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup Java SDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Generate Android Native Code
+        run: npx expo prebuild --platform android --clean
+
+      - name: Build Android Release APK
+        working-directory: ./mobile/android
+        # Using assembleRelease to generate the APK without the EAS queue
+        run: ./gradlew assembleRelease --no-daemon
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: acid-sys-android-apk
+          # Expose all APKs generated (usually app-release.apk or app-release-unsigned.apk)
+          path: mobile/android/app/build/outputs/apk/release/*.apk
