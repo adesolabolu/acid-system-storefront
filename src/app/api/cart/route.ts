@@ -63,7 +63,8 @@ export async function POST(req: Request) {
 const DeleteCartSchema = z.object({
   id: z.number().int().optional(),
   product_sku: z.string().optional(),
-  size: z.string().optional()
+  size: z.string().optional(),
+  clearAll: z.boolean().optional()
 });
 
 export async function DELETE(req: Request) {
@@ -77,14 +78,16 @@ export async function DELETE(req: Request) {
       return NextResponse.json({ error: 'Invalid payload', details: parsed.error.issues }, { status: 400 });
     }
 
-    const { id, product_sku, size } = parsed.data;
+    const { id, product_sku, size, clearAll } = parsed.data;
 
-    if (id) {
+    if (clearAll) {
+      await sql`DELETE FROM cart_items WHERE user_id = ${user.userId}`;
+    } else if (id) {
       await sql`DELETE FROM cart_items WHERE id = ${id} AND user_id = ${user.userId}`;
     } else if (product_sku && size) {
       await sql`DELETE FROM cart_items WHERE product_sku = ${product_sku} AND size = ${size} AND user_id = ${user.userId}`;
     } else {
-      return NextResponse.json({ error: 'Provide id or product_sku and size' }, { status: 400 });
+      return NextResponse.json({ error: 'Provide id, product_sku/size, or clearAll' }, { status: 400 });
     }
 
     cartEventEmitter.emit(`cart_update_${user.userId}`);

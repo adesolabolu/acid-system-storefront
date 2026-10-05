@@ -148,8 +148,19 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  const clearCart = () => {
+  const clearCart = async () => {
     setCart([]);
+    if (status === 'authenticated') {
+      try {
+        await fetch('/api/cart', {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ clearAll: true })
+        });
+      } catch (e) {
+        console.error('Failed to clear DB cart', e);
+      }
+    }
   };
 
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);

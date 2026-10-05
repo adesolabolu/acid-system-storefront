@@ -173,6 +173,21 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
         {/* Cart Items List */}
         <div className="p-6 flex-1 overflow-y-auto space-y-4">
+          {!orderConfirmed && items.length > 0 && (
+            <div className="flex justify-between items-center mb-2">
+              <span className="font-mono-code text-[10px] font-bold uppercase tracking-widest text-[#09090B]/60">
+                {items.length} {items.length === 1 ? 'ARTIFACT' : 'ARTIFACTS'}
+              </span>
+              <button
+                onClick={onClearCart}
+                className="font-mono-code text-[10px] font-bold uppercase tracking-widest text-red-600 hover:text-[#09090B] transition-colors flex items-center gap-1"
+                data-cursor="pointer"
+              >
+                <Trash2 className="w-3 h-3" />
+                <span>CLEAR ALL</span>
+              </button>
+            </div>
+          )}
           {orderConfirmed ? (
             <div className="p-6 bg-white border-2 border-[#09090B] rounded-[16px] shadow-hard text-center">
               <div className="w-12 h-12 bg-[#D2E823] border-2 border-[#09090B] rounded-full mx-auto flex items-center justify-center mb-3">
