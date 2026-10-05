@@ -74,6 +74,10 @@ jobs:
         run: |
           SCHEME_NAME=$(xcodebuild -workspace ios/*.xcworkspace -list | awk '/Schemes:/{flag=1;next} flag{print $1;exit}')
           echo "Detected scheme: $SCHEME_NAME"
+          
+          # Disable exit-on-error so we can manually catch the pipe failure
+          set +e
+          
           xcodebuild -workspace ios/*.xcworkspace \
             -scheme "$SCHEME_NAME" \
             -configuration Release \
@@ -90,6 +94,24 @@ jobs:
             SWIFT_VERSION=5.9 \
             GCC_WARN_INHIBIT_ALL_WARNINGS=YES \
             build 2>&1 | tee build.log
+          
+          BUILD_EXIT=${PIPESTATUS[0]}
+          
+          # Validate the build actually succeeded
+          if [ $BUILD_EXIT -ne 0 ]; then
+            echo "❌ Build failed! Check build.log for details."
+            tail -n 100 build.log
+            exit 1
+          fi
+          
+          # Verify the app bundle exists
+          if ! find ios/build/Build/Products/Release-iphoneos -name "*.app" -type d -exec test -f '{}/Info.plist' \; -print | head -n 1 | grep -q .; then
+            echo "❌ Build completed but no valid .app bundle generated!"
+            find ios/build/Build/Products/Release-iphoneos -type d -name "*.app" | head -5
+            exit 1
+          fi
+          
+          echo "✅ Build succeeded and app bundle found"
 
       - name: Package Payload into IPA
         run: |
