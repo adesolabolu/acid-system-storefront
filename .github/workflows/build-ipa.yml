@@ -36,9 +36,18 @@ jobs:
         run: |
           find node_modules -type f -name "Package.swift" -exec sed -i '' 's/swift-tools-version: 6.2/swift-tools-version: 6.0/g' {} +
 
-      - name: Patch Expo JSI Header
+      - name: Patch Expo JSI Header (if needed)
         run: |
-          find node_modules -name "RuntimeScheduler.h" -exec sed -i '' 's/SWIFT_RETURNS_RETAINED RuntimeScheduler/RuntimeScheduler/g' {} +
+          # Only patch if RuntimeScheduler.h exists and truly needs patching
+          RUNTIME_SCHEDULER=$(find node_modules -name "RuntimeScheduler.h" -type f | head -1)
+          if [ -n "$RUNTIME_SCHEDULER" ]; then
+            if grep -q "SWIFT_RETURNS_RETAINED RuntimeScheduler" "$RUNTIME_SCHEDULER"; then
+              sed -i '' 's/SWIFT_RETURNS_RETAINED RuntimeScheduler/RuntimeScheduler/g' "$RUNTIME_SCHEDULER"
+              echo "Patched RuntimeScheduler.h"
+            fi
+          else
+            echo "RuntimeScheduler.h not found - skipping patch"
+          fi
 
       - name: Run Expo iOS Prebuild
         run: npx expo prebuild --platform ios --clean
@@ -53,10 +62,25 @@ jobs:
               content = File.read(file)
               snippet = %Q{
                 installer.pods_project.targets.each do |target|
+                  # Skip ExpoModulesJSI to prevent build script conflicts
+                  next if target.name == "ExpoModulesJSI"
+                  
                   target.build_configurations.each do |config|
                     config.build_settings["SWIFT_STRICT_CONCURRENCY"] = "minimal"
                     config.build_settings["SWIFT_VERSION"] = "5.9"
                     config.build_settings["GCC_WARN_INHIBIT_ALL_WARNINGS"] = "YES"
+                  end
+                end
+                
+                # Handle ExpoModulesJSI separately with special configuration
+                jsi_target = installer.pods_project.targets.find { |t| t.name == "ExpoModulesJSI" }
+                if jsi_target
+                  jsi_target.build_configurations.each do |config|
+                    config.build_settings["SWIFT_STRICT_CONCURRENCY"] = "minimal"
+                    config.build_settings["SWIFT_VERSION"] = "5.9"
+                    config.build_settings["GCC_WARN_INHIBIT_ALL_WARNINGS"] = "YES"
+                    # Ensure proper JSI header handling
+                    config.build_settings["HEADER_SEARCH_PATHS"] = "$(inherited) $(PODS_ROOT)/Headers/Public/ReactCommon $(PODS_ROOT)/Headers/Public/React-jsi"
                   end
                 end
               }
