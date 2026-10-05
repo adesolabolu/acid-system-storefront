@@ -94,9 +94,28 @@ jobs:
       - name: Package Payload into IPA
         run: |
           mkdir -p build/Payload
-          cp -r ios/build/Build/Products/Release-iphoneos/*.app build/Payload/
+          
+          # 1. Dynamically locate the true app bundle (the one containing Info.plist)
+          APP_PATH=$(find ios/build/Build/Products/Release-iphoneos -name "*.app" -type d -exec test -f '{}/Info.plist' \; -print | head -n 1)
+          
+          if [ -z "$APP_PATH" ]; then
+            echo "Error: Valid .app bundle with Info.plist not found in Release-iphoneos!"
+            echo "Falling back to exhaustive search across all derived data:"
+            APP_PATH=$(find ios/build -name "*.app" -type d -exec test -f '{}/Info.plist' \; -print | head -n 1)
+            if [ -z "$APP_PATH" ]; then
+              echo "Fatal: No complete .app bundle found anywhere!"
+              exit 1
+            fi
+          fi
+          
+          echo "Found true compiled app bundle at: $APP_PATH"
+          
+          # 2. Use ditto (Apple's native tool) to preserve all bundle metadata and structure perfectly
+          ditto "$APP_PATH" "build/Payload/$(basename "$APP_PATH")"
+          
+          # 3. Compress the Payload directory into an IPA using ditto instead of standard zip
           cd build
-          zip -r acid-sys.ipa Payload/
+          ditto -c -k --keepParent Payload acid-sys.ipa
           mv acid-sys.ipa ../
 
       - name: Upload IPA Artifact
