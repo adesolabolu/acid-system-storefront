@@ -57,7 +57,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <>
-    <header className="sticky top-4 z-40 mx-4 md:mx-8 mb-6">
+    <header className="sticky top-2 md:top-4 z-40 mx-3 md:mx-8 mb-4 md:mb-6">
       <div className="flex items-center justify-between px-5 md:px-7 py-3.5 bg-[#F8F4E8]/90 backdrop-blur-[24px] border-2 border-[#09090B] rounded-[12px] shadow-hard">
         {/* Zone 1: Brand Wordmark in Dela Gothic One */}
         <Link
@@ -211,4 +211,5 @@ export const Navbar: React.FC<NavbarProps> = ({
     </>
   );
 };
+
 
