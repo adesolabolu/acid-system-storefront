@@ -16,16 +16,6 @@ export const authOptions: NextAuthOptions = {
         },
       },
     }),
-    CredentialsProvider({
-      name: "Sandbox Dummy",
-      credentials: {},
-      async authorize() {
-        const email = "sandbox@acidsys.com";
-        const name = "Sandbox Agent";
-        const image = "https://api.dicebear.com/7.x/bottts/png?seed=sandbox";
-        return { id: "9999", email, name, image };
-      }
-    }),
   ],
   session: { strategy: "jwt" },
   secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET,

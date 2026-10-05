@@ -89,17 +89,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
             )}
           </button>
 
-          {/* QUICK DUMMY DEV LOGIN */}
-          <button
-            onClick={() => {
-              setIsConnecting(true);
-              signIn('credentials');
-            }}
-            disabled={isConnecting}
-            className="w-full mt-3 flex items-center justify-center gap-3 py-4 bg-[#D2E823] border-2 border-[#09090B] rounded-[10px] shadow-hard-sm hover:translate-y-[2px] hover:shadow-none transition-all text-[#09090B] font-mono-code font-bold text-sm disabled:opacity-50"
-          >
-            <span>[ ONE-CLICK SANDBOX LOGIN ]</span>
-          </button>
 
           {/* Newsletter Opt-in */}
           <div className="mt-6 flex items-start gap-3">
