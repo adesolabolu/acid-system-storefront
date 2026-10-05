@@ -17,6 +17,10 @@ export default function App() {
           showsHorizontalScrollIndicator={false}
           sharedCookiesEnabled={true}
           thirdPartyCookiesEnabled={true}
+          domStorageEnabled={true}
+          javaScriptEnabled={true}
+          mixedContentMode="always"
+          allowFileAccess={true}
           applicationNameForUserAgent="AcidSysMobileApp"
           injectedJavaScript={`
             document.documentElement.classList.add('is-native-app');
