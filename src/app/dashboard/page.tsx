@@ -77,24 +77,24 @@ export default async function DashboardPage() {
         </div>
 
         {/* Dashboard Header */}
-        <div className="bg-[#09090B] text-[#F8F4E8] p-8 md:p-12 border-2 border-[#09090B] shadow-hard-lg mb-8 relative overflow-hidden group">
-          <div className="absolute top-0 right-0 p-4 opacity-10 font-display text-9xl leading-none pointer-events-none group-hover:scale-110 transition-transform duration-1000">
+        <div className="bg-[#09090B] text-[#F8F4E8] p-5 sm:p-8 md:p-12 border-2 border-[#09090B] shadow-hard-lg mb-8 relative overflow-hidden group">
+          <div className="absolute top-0 right-0 p-4 opacity-10 font-display text-7xl sm:text-9xl leading-none pointer-events-none group-hover:scale-110 transition-transform duration-1000">
             OP
           </div>
           
-          <div className="font-mono-code text-[#D2E823] text-xs font-bold uppercase tracking-widest mb-4 flex items-center gap-2">
-            <span className="w-3 h-3 bg-[#D2E823]" />
+          <div className="font-mono-code text-[#D2E823] text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-4 flex items-center gap-2">
+            <span className="w-2 h-2 sm:w-3 sm:h-3 bg-[#D2E823]" />
             OPERATOR PROFILE // CLASSIFIED
           </div>
           <GlitchText
             text={`WELCOME, ${session.user.name?.toUpperCase() || 'OPERATOR'}`}
             as="h1"
-            className="text-4xl md:text-6xl mb-6 relative z-10"
+            className="text-2xl sm:text-4xl md:text-6xl mb-4 sm:mb-6 relative z-10"
           />
-          <div className="font-mono-code text-sm opacity-80 border-t-2 border-[#F8F4E8]/20 pt-4 max-w-md">
+          <div className="font-mono-code text-[10px] sm:text-sm opacity-80 border-t-2 border-[#F8F4E8]/20 pt-4 max-w-md">
             <div className="flex justify-between mb-2">
               <span>COMMS ID:</span>
-              <span className="text-[#D2E823]">{session.user.email}</span>
+              <span className="text-[#D2E823] truncate ml-2">{session.user.email}</span>
             </div>
             <div className="flex justify-between">
               <span>ACCESS LEVEL:</span>

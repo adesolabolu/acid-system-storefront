@@ -70,7 +70,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               data-cursor="pointer"
             >
               <span className="flex items-center gap-2">
-                <span>EXPLORE COLLECTION (30)</span>
+                <span>EXPLORE COLLECTION</span>
                 <ArrowDownRight className="w-5 h-5 group-hover:translate-x-1 group-hover:translate-y-1 transition-transform" />
               </span>
             </a>

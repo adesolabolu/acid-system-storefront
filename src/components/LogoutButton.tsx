@@ -12,7 +12,7 @@ export const LogoutButton = () => {
       className="mt-6 flex items-center justify-center gap-2 w-full bg-red-600 text-[#F8F4E8] font-mono-code font-bold text-xs uppercase px-4 py-3 border-2 border-[#09090B] hover:bg-red-700 hover:border-[#09090B] transition-colors shadow-hard-sm"
     >
       <LogOut className="w-4 h-4" />
-      <span>TERMINATE CONNECTION</span>
+      <span>LOGOUT</span>
     </button>
   );
 };

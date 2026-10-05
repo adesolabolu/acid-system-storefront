@@ -186,12 +186,8 @@ export const DropsSection: React.FC<DropsSectionProps> = ({
         data-cursor="pointer"
       >
         <div className="flex flex-col items-center justify-center text-center px-4">
-          <div className="font-mono-code text-xs font-bold uppercase tracking-widest mb-2 flex items-center gap-2">
-            <span className="w-2 h-2 bg-current rounded-full animate-pulse" />
-            ALLOCATION STATUS: ACTIVE
-          </div>
           <div className="font-display text-2xl md:text-4xl uppercase flex items-center gap-4">
-            VIEW COMPLETE 30-PIECE ARCHIVE (₦)
+            VIEW COMPLETE COLLECTION
             <ArrowRight className="w-8 h-8 md:w-10 md:h-10 transition-transform group-hover:translate-x-2" />
           </div>
         </div>
