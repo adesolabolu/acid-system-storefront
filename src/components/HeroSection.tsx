@@ -34,9 +34,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       </div>
 
       {/* 12-Column Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center native-hero-grid">
+      <div className="flex flex-col-reverse lg:grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
         {/* Left Side: 7 Columns */}
-        <div className="lg:col-span-7 flex flex-col justify-center native-hero-left">
+        <div className="lg:col-span-7 flex flex-col justify-center ">
           <div className="space-y-1 mb-6 max-w-full native-hide">
             <div>
               <GlitchText
@@ -62,11 +62,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </p>
 
           {/* Action CTAs */}
-          <div className="flex flex-wrap items-center gap-4 sm:gap-6 native-hero-cta">
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6 ">
             {/* Primary Hard-Shadow Button */}
             <a
               href="/shop"
-              className="btn-hard text-sm sm:text-base group inline-flex items-center w-full sm:w-auto"
+              className="btn-hard text-lg sm:text-base group inline-flex items-center justify-center w-full sm:w-auto py-4 sm:py-3"
               data-cursor="pointer"
             >
               <span className="flex items-center gap-2">
@@ -104,7 +104,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         </div>
 
         {/* Right Side: 5 Columns with Primary Image Card + Floating Asset Card */}
-        <div className="lg:col-span-5 relative native-hero-right">
+        <div className="lg:col-span-5 relative ">
           {/* Main Hero Card: 32px border radius, #09090B border */}
           <div className="relative w-full aspect-[4/3] sm:aspect-square rounded-[32px] border-2 border-[#09090B] overflow-hidden shadow-hard-xl bg-[#09090B]">
             {/* Primary Visual artwork */}
@@ -152,4 +152,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     </section>
   );
 };
+
+
 

@@ -195,34 +195,15 @@ html.is-native-app body {
 /* =========================================================================
    HERO SECTION OVERRIDES FOR NATIVE APP
    ========================================================================= */
-html.is-native-app .native-hero-grid {
-  display: flex !important;
-  flex-direction: column-reverse !important; /* Forces the image card to the top, CTA to the bottom */
-  gap: 1.5rem !important;
-}
 
-html.is-native-app .native-hero-left {
-  width: 100% !important;
-  display: flex !important;
-  justify-content: center !important;
-  margin-top: 0 !important;
-}
 
-html.is-native-app .native-hero-cta {
-  width: 100% !important;
-  justify-content: center !important;
-}
 
-html.is-native-app .native-hero-cta .btn-hard {
-  width: 100% !important;
-  font-size: 1.125rem !important;
-  padding-top: 1.25rem !important;
-  padding-bottom: 1.25rem !important;
-}
 
-html.is-native-app .native-hero-right {
-  width: 100% !important;
-}
+
+
+
+
+
 
 /* Show elements only in native app */
 .native-only, .native-only-flex {
@@ -235,11 +216,7 @@ html.is-native-app .native-only-flex {
   display: flex !important;
 }
 
-html.is-native-app .native-unsticky {
-  position: relative !important;
-  top: auto !important;
-  z-index: 10 !important;
-}
+
 
 html.is-native-app .native-product-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
@@ -256,6 +233,7 @@ html.is-native-app .native-product-grid .text-sm {
 }
 
 /* Add extra padding to the top of the hero section on mobile app */
-html.is-native-app #hero {
-  padding-top: 2.5rem !important;
-}
+
+
+
+
